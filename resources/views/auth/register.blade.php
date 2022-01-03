@@ -47,12 +47,12 @@
             </div>
             <div class="flex items-center justify-center mt-7">
                 <x-button class="">
-                    {{ __('dashboard.btnRegister') }}
+                    {{ trans('dashboard.btnRegister') }}
                 </x-button>
                 </div>
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('dashboard.register') }}
+                    {{ trans('dashboard.register') }}
                 </a>
             </div>
         </form>

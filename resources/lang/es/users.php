@@ -10,8 +10,14 @@ return [
         'status' => 'Estado',
         ],
     'actions'=>[
+        'active' => 'Activo',
+        'inactive' =>'Inactivo',
+        'index' => 'Lista de usuarios',
+        'edit' => 'Editar usuario',
         'more' => 'Mas',
         'update' => 'Actualizar',
-        'delete' => 'Eliminar'
+        'delete' => 'Eliminar',
+        'success' => 'Acción realizada con exito',
+        'disabled' => 'El usuario se encuentra deshabilitado, comuniquese con el administrador'
     ]
 ];

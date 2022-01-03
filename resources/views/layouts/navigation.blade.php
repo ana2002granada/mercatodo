@@ -4,11 +4,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-end gap-5 content-center">
                 <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('dashboard.home') }}
+                    {{ trans('dashboard.home') }}
                 </x-nav-link>
             @can('viewAny', App\Models\User::class)
                 <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                    {{ __('dashboard.users') }}
+                    {{ trans('dashboard.users') }}
                 </x-nav-link>
             @endcan
             <!-- Settings Dropdown -->
@@ -35,7 +35,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ trans('auth.logout') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -46,11 +46,11 @@
         @if (Route::has('login'))
             <div class="hidden fixed right-0 px-14 sm:block ">
                 <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    {{ __('dashboard.login') }}
+                    {{ trans('dashboard.login') }}
                 </x-nav-link>
                 @if (Route::has('register'))
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                        {{ __('dashboard.btnRegister') }}
+                        {{ trans('dashboard.btnRegister') }}
                     </x-nav-link>
                 @endif
             </div>

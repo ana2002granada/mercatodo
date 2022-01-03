@@ -21,12 +21,12 @@
         <div class="flex gap-3">
             @can('viewAny',$user)
             <a href="{{route('users.index')}}"  class="flex self-center gap-3 font-bold py-1 px-3 rounded text-white text-xs bg-gray-600 hover:bg-gray-400 hover:text-gray-700 ">
-                <em class="fas fa-arrow-circle-left flex self-center"></em> Atrás
+                <em class="fas fa-arrow-circle-left flex self-center"></em> {{trans('dashboard.back')}}
             </a>
             @endcan
             @can('update',$user)
             <a href="{{route('users.edit',$user)}}"  class="flex self-center gap-3 font-bold py-1 px-3 rounded text-xs bg-green-500 hover:bg-green-400 ">
-                <em class="fas fa-edit flex self-center"></em> Editar
+                <em class="fas fa-edit flex self-center"></em> {{trans('users.actions.edit')}}
             </a>
             @endcan
         </div>

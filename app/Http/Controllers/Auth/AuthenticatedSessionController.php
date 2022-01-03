@@ -17,12 +17,6 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
@@ -30,18 +24,12 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (auth()->user()->disabled_at) {
-            return $this->logout($request)->with('error', 'Usuario inhabilitado');
+            return $this->logout($request)->with('error', trans('users.actions.disabled'));
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Request $request): RedirectResponse
     {
         return $this->logout($request);

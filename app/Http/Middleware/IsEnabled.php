@@ -17,7 +17,7 @@ class IsEnabled
 
             $request->session()->regenerateToken();
 
-            return redirect()->route('login')->with('error', 'Usuario inhabilitado');
+            return redirect()->route('login')->with('error', trans('users.actions.disabled'));
         }
 
         return $next($request);

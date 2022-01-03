@@ -11,5 +11,11 @@ return [
     'users' => 'Usuarios',
     'login' => 'Iniciar sesion',
     'logout' => 'Salir',
-    'error' => '¡Ups! Algo salió mal.'
+    'error' => '¡Ups! Algo salió mal.',
+    'back' => 'Atrás',
+    'confirm' => 'Confirmar',
+    'cancel' => 'Cancelar',
+    'sure' => '¿Estás seguro?',
+    'sure_delete_description' => 'Estás a punto de eliminar un usuario',
+    'success' => 'Exito',
 ];

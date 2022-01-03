@@ -1,7 +1,7 @@
 <x-app-layout>
 <div class="bg-white p-8 rounded-md w-full">
     <div class=" flex items-center justify-between pb-6">
-          <h2 class="text-gray-600 font-semibold">Lista de usuarios</h2>
+          <h2 class="text-gray-600 font-semibold">{{trans('users.actions.index')}}</h2>
     </div>
     <div>
         <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -38,10 +38,10 @@
                                 <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                     @if($user->disabled_at === null)
                                         <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Activo</span>
+                                        <span class="relative">{{trans('users.actions.active')}}</span>
                                     @else
                                         <span aria-hidden class="absolute inset-0 bg-red-400 opacity-50 rounded-full"></span>
-                                        <span class="relative">Inactivo</span>
+                                        <span class="relative">{{trans('users.actions.inactive')}}</span>
                                     @endif
 									</span>
                                 </td>
@@ -69,7 +69,7 @@
                                                     <x-dropdown-link>
                                                         <form action="{{ route('users.toggle', $user) }}" method="POST">
                                                         @csrf
-                                                            <button type='submit'>{{$user->disabled_at ? 'Habilitar' : 'Deshabilitar'}}</button>
+                                                            <button type='submit'>{{$user->disabled_at ? trans('users.actions.enable') : trans('users.actions.disable')}}</button>
                                                         </form>
                                                     </x-dropdown-link>
                                                 @endcan

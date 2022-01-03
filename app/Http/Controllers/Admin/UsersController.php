@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\FormUserRequest;
 use App\Models\User;
-use http\Env\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -29,6 +28,7 @@ class UsersController extends Controller
         $this->authorize('update', $user);
         return view('admin.users.edit', compact('user'));
     }
+
     public function update(FormUserRequest $request, User $user): RedirectResponse
     {
         $this->authorize('update', $user);
@@ -38,22 +38,22 @@ class UsersController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->save();
 
-        return response()->redirectToRoute('users.index');
+        return response()->redirectToRoute('users.index')->with('success', trans('users.actions.success'));
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         $this->authorize('delete', $user);
         $user->delete();
 
-        return response()->redirectToRoute('users.index');
+        return response()->redirectToRoute('users.index')->with('success', trans('users.actions.success'));
     }
 
-    public function toggle(User $user)
+    public function toggle(User $user): RedirectResponse
     {
         $this->authorize('toggle', $user);
         $user->disabled_at = $user->disabled_at ? null : now();
         $user->save();
-        return response()->redirectToRoute('users.index')->with('success', 'Acción realizada con exito');
+        return response()->redirectToRoute('users.index')->with('success', trans('users.actions.success'));
     }
 }

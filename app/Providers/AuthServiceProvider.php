@@ -9,16 +9,10 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * @var array
-     */
     protected $policies = [
         User::class => UserPolicy::class,
     ];
 
-    /**
-     * @return void
-     */
     public function boot(): void
     {
         $this->registerPolicies();

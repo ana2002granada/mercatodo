@@ -8,7 +8,7 @@
             </div>
             <div class="flex flex-col justify-center">
                 <h1 class="text-2xl text-gray-900 ">
-                    Editar usuario
+                    {{trans('users.actions.edit')}}
                 </h1>
                 <h2 class="text-sm text-gray-700">
                     {{ $user->fullname() }}
