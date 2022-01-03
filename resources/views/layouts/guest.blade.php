@@ -14,12 +14,17 @@
 
         <!-- Scripts -->
         <script src="https://kit.fontawesome.com/6a440e0993.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        @include('layouts.alerts')
     </head>
-    <body class="h-screen flex flex-col">
-        <x-header />
-        <div class="h-full font-sans text-gray-900 antialiased mt-28">
-            {{ $slot }}
+    <body>
+        <div id="app" class="h-screen flex flex-col">
+            <x-header />
+            <div class="h-full font-sans text-gray-900 antialiased mt-28">
+                {{ $slot }}
+            </div>
+            <alert />
         </div>
+    <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

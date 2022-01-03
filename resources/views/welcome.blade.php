@@ -21,22 +21,6 @@
     <body class="antialiased">
 
         <div class="relative flex justify-center min-h-full bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <x-header>
-            @if (Route::has('login'))
-                <div class="hidden fixed right-0 px-14 sm:block ">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-white dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-white dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-white dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-
-            @endif
-            </x-header>
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
