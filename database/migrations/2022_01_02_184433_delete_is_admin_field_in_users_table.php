@@ -4,12 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsAdminFieldInUsersTable extends Migration
+class DeleteIsAdminFieldInUsersTable extends Migration
 {
-    public function up(): void
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->default(false);
+            $table->dropColumn(['is_admin']);
         });
     }
 
@@ -18,10 +23,10 @@ class AddIsAdminFieldInUsersTable extends Migration
      *
      * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['is_admin']);
+            $table->boolean('is_admin')->default(false);
         });
     }
 }
