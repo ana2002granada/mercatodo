@@ -16,7 +16,7 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="trans('users.info.email')" />
+                <x-label for="email" :value="trans('register.email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
