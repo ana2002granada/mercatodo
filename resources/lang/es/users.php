@@ -18,6 +18,8 @@ return [
         'update' => 'Actualizar',
         'delete' => 'Eliminar',
         'success' => 'Acción realizada con exito',
-        'disabled' => 'El usuario se encuentra deshabilitado, comuniquese con el administrador'
+        'disabled' => 'El usuario se encuentra deshabilitado, comuniquese con el administrador',
+        'enable' => 'Habilitar',
+        'disable' => 'Deshabilitar',
     ]
 ];
