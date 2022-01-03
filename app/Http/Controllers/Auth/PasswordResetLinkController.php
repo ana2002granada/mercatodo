@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\View\View;
 
 class PasswordResetLinkController extends Controller
 {
@@ -13,7 +15,7 @@ class PasswordResetLinkController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): view
     {
         return view('auth.forgot-password');
     }
@@ -26,7 +28,7 @@ class PasswordResetLinkController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'email' => ['required', 'email'],

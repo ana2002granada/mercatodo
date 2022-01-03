@@ -5,17 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): view
     {
         return view('auth.login');
     }
@@ -26,11 +23,15 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        if (auth()->user()->disabled_at) {
+            return $this->logout($request)->with('error', 'Usuario inhabilitado');
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -41,7 +42,12 @@ class AuthenticatedSessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
+    {
+        return $this->logout($request);
+    }
+
+    public function logout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
