@@ -1,33 +1,98 @@
 <x-app-layout>
-<div class="mx-auto">
-    <div class="bg-white shadow-md rounded my-10">
-        <table class="text-center w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
-            <thead>
-            <tr>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{{trans('user_table.name')}}</th>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{{trans('user_table.email')}}</th>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{{trans('user_table.created_at')}}</th>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{{trans('user_table.type')}}</th>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{{trans('user_table.actions')}}</th>
-            </tr>
-            </thead>
-
-
-            <tbody>
-            @foreach($users as $user)
-            <tr class="hover:bg-grey-lighter">
-                <td class="py-4 px-6 border-b border-grey-light">{{ $user->name }}</td>
-                <td class="py-4 px-6 border-b border-grey-light">{{ $user->email}}</td>
-                <td class="py-4 px-6 border-b border-grey-light">{{ $user->created_at}}</td>
-                <td class="py-4 px-6 border-b border-grey-light">{{ $user->is_admin ?'Admin':'Usuario'}}</td>
-                <td class="py-4 px-6 border-b border-grey-light">
-                    <a href="{{ route('users.show',$user) }}"  class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-600 hover:bg-green-400 ">Mas</a><!--<em class="fas fa-edit"></em>-->
-                </td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
+<div class="bg-white p-8 rounded-md w-full">
+    <div class=" flex items-center justify-between pb-6">
+          <h2 class="text-gray-600 font-semibold">{{trans('users.actions.index')}}</h2>
     </div>
-    {{ $users->onEachSide(5)->links() }}
+    <div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                    <tr class="bg-gray-100 border-b-2 text-left text-xs text-gray-600 uppercase ">
+                        <th scope="col" class="px-5 py-3">{{trans('register.name')}}</th>
+                        <th scope="col" class="px-5 py-3">{{trans('register.email')}}</th>
+                        <th scope="col" class="px-5 py-3">{{trans('users.info.status')}}</th>
+                        <th scope="col" class="px-5 py-3"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 w-10 h-10">
+                                            <img class="w-full h-full rounded-full"
+                                                 src="{{$user->image()}}"
+                                                 alt="{{ $user->fullname() }}" />
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                {{ $user->fullname() }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 text-sm">{{ $user->email}}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    @if($user->disabled_at === null)
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">{{trans('users.actions.active')}}</span>
+                                    @else
+                                        <span aria-hidden class="absolute inset-0 bg-red-400 opacity-50 rounded-full"></span>
+                                        <span class="relative">{{trans('users.actions.inactive')}}</span>
+                                    @endif
+									</span>
+                                </td>
+                                <td>
+                                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                                        <x-dropdown align="right" width="48">
+                                            <x-slot name="trigger">
+                                                <button class="flex items-center text-sm font-medium text-gray-800 hover:text-gray-400 hover:border-gray-300 focus:outline-none focus:text-gray-600 focus:border-gray-300 transition duration-150 ease-in-out">
+                                                    <em class="fas fa-ellipsis-v"></em>
+                                                </button>
+                                            </x-slot>
+
+                                            <x-slot name="content">
+                                                @can('view',$user)
+                                                <x-dropdown-link :href="route('users.show', $user)">
+                                                    {{trans('users.actions.more')}}
+                                                </x-dropdown-link>
+                                                @endcan
+                                                @can('update',$user)
+                                                <x-dropdown-link :href="route('users.edit', $user)">
+                                                    {{trans('users.actions.update')}}
+                                                </x-dropdown-link>
+                                                @endcan
+                                                @can('toggle',$user)
+                                                    <x-dropdown-link>
+                                                        <form action="{{ route('users.toggle', $user) }}" method="POST">
+                                                        @csrf
+                                                            <button type='submit'>{{$user->disabled_at ? trans('users.actions.enable') : trans('users.actions.disable')}}</button>
+                                                        </form>
+                                                    </x-dropdown-link>
+                                                @endcan
+                                                @can('delete', $user)
+                                                <x-dropdown-link>
+                                                    <button @click="$root.$emit('open-modal', {'route': '{{route('users.destroy', $user)}}'})">
+                                                        {{trans('users.actions.delete')}}
+                                                    </button>
+                                                </x-dropdown-link>
+                                                @endcan
+                                            </x-slot>
+                                        </x-dropdown>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $users->onEachSide(5)->links() }}
+
+            </div>
+        </div>
+    </div>
 </div>
+    <x-delete-modal />
 </x-app-layout>

@@ -1,6 +1,6 @@
+
 <x-guest-layout>
     <x-auth-card>
-
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -11,15 +11,15 @@
             @csrf
 
             <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
+            <div class="mb-7">
+                <x-label for="email" :value="trans('users.info.email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Contraseña')" />
+            <div class="mb-7">
+                <x-label for="password" :value="trans('register.password')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -31,25 +31,25 @@
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Recordarme') }}</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ trans('register.remember') }}</span>
                 </label>
             </div>
-            <div class="flex items-center justify-center mt-5 mb-3">
+            <div class="flex items-center justify-center mt-12 mb-10">
                 <x-button >
-                   {{ __('INICIAR') }}
+                   {{ trans('dashboard.login') }}
                 </x-button>
             </div>
-            <div class="flex items-center justify-between  mb-3">
+        </form>
+            <div class="flex items-end m-3 mt-5 mb-10">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 " href="{{ route('password.request') }}">
-                        {{ __('Recuperar Contraseña') }}
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 mr-14" href="{{ route('password.request') }}">
+                        {{ trans('dashboard.recoverPassword') }}
                     </a>
                 @endif
+
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                    {{ __('¿No estás registrado? ') }}
+                    {{ trans('dashboard.noRegister') }}
                 </a>
             </div>
-
-        </form>
     </x-auth-card>
 </x-guest-layout>

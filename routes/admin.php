@@ -3,18 +3,8 @@
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/users', [UsersController::class, 'index'])
-                ->middleware(['auth', 'verified'])
-                ->name('users.index');
-
-Route::get('/users/{user}', [UsersController::class, 'show'])
-    ->middleware('auth')
-    ->name('users.show');
-
-Route::get('/users/update/{user}', [UsersController::class, 'update'])
-    ->middleware('auth')
-    ->name('users.update');
-
-
-
+Route::resource('users', UsersController::class)->except(['create','store'])
+    ->middleware(['enabled','auth','verified']);
+Route::post('users/toggle/{user}', [UsersController::class, 'toggle'])
+    ->name('users.toggle')
+    ->middleware(['enabled','auth','verified']);

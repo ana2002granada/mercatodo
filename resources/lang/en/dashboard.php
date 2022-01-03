@@ -6,5 +6,8 @@ return [
     'btnRegister' => 'Register',
     'register' => 'Already registered?',
     'btnUpdate' => 'Update',
-    'users' => 'Users'
+    'users' => 'Users',
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'error' => 'Whoops! Something went wrong.'
 ];
