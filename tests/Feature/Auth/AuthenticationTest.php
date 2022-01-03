@@ -42,4 +42,15 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
     }
+    public function testAnUserCanNotEnterIfIsDisabled()
+    {
+        $user = User::factory(['disabled_at'=>now()])->create();
+        $response=$this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertGuest();
+        $response->assertSessionHas('error');
+    }
 }
