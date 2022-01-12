@@ -18,9 +18,9 @@
         @include('layouts.alerts')
     </head>
     <body>
-        <div id="app" class="h-screen flex flex-col">
+        <div id="app" class="h-screen flex flex-col ">
             <x-header />
-            <div class="h-full font-sans text-gray-900 antialiased mt-28">
+            <div class="h-full font-sans text-gray-900 antialiased mt-28 flex flex-col">
                 {{ $slot }}
             </div>
             <alert />

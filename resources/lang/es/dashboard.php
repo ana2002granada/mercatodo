@@ -9,6 +9,8 @@ return [
     'recoverPassword' => 'Recuperar Contraseña',
     'btnUpdate' => 'Actualizar',
     'users' => 'Usuarios',
+    'products' => 'Productos',
+    'categories' => 'Categorías',
     'login' => 'Iniciar sesion',
     'logout' => 'Salir',
     'error' => '¡Ups! Algo salió mal.',

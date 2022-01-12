@@ -11,6 +11,10 @@
                     {{ trans('dashboard.users') }}
                 </x-nav-link>
             @endcan
+            <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                {{ trans('dashboard.categories') }}
+            </x-nav-link>
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
