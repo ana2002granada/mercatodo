@@ -9,7 +9,6 @@ trait ProductPermissions
     public static function getProductsPermissions(): array
     {
         return [
-            Permissions::PRODUCTS_INDEX,
         ];
     }
 }

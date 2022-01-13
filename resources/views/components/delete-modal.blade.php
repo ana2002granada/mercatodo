@@ -1,4 +1,4 @@
-<modal inline-template>
+<modal inline-template v-cloak>
     <div v-if="showModal">
         <transition  enter-class="transition ease-out duration-200"
                      enter-active-class="transform opacity-0 scale-95"

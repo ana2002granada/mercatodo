@@ -1,14 +1,13 @@
 <x-app-layout>
-<div class="bg-white p-8 rounded-md w-full">
     <div class=" flex items-center justify-between pb-6">
-          <h2 class="text-gray-600 font-semibold">{{trans('users.actions.index')}}</h2>
+        <h2 class="text-gray-600 font-bold text-2xl">{{trans('users.actions.index')}}</h2>
     </div>
     <div>
         <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                <table class="min-w-full leading-normal">
+                <table class="bg-white min-w-full leading-normal">
                     <thead>
-                    <tr class="bg-gray-100 border-b-2 text-left text-xs text-gray-600 uppercase ">
+                    <tr class="bg-gray-200 border-b-2 border-gray-300 text-left text-xs text-gray-600 uppercase ">
                         <th scope="col" class="px-5 py-3">{{trans('register.name')}}</th>
                         <th scope="col" class="px-5 py-3">{{trans('register.email')}}</th>
                         <th scope="col" class="px-5 py-3">{{trans('users.info.status')}}</th>
@@ -17,8 +16,8 @@
                     </thead>
                     <tbody>
                         @foreach($users as $user)
-                            <tr class="hover:bg-gray-100">
-                                <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                            <tr class="hover:bg-gray-200">
+                                <td class="px-5 py-5 border-b border-gray-300 text-sm">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-full h-full rounded-full"
@@ -89,10 +88,8 @@
                     </tbody>
                 </table>
                 {{ $users->onEachSide(5)->links() }}
-
             </div>
         </div>
     </div>
-</div>
     <x-delete-modal />
 </x-app-layout>

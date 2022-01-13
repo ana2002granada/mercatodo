@@ -20,7 +20,7 @@
     <body>
         <div id="app" class="h-screen flex flex-col ">
             <x-header />
-            <div class="h-full font-sans text-gray-900 antialiased mt-28 flex flex-col">
+            <div class="h-full font-sans text-gray-900 mt-28 flex flex-col">
                 {{ $slot }}
             </div>
             <alert />

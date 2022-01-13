@@ -15,6 +15,7 @@ return [
         'index' => 'Lista de usuarios',
         'edit' => 'Editar usuario',
         'more' => 'Mas',
+        'show' => 'Ver',
         'update' => 'Actualizar',
         'delete' => 'Eliminar',
         'success' => 'Acción realizada con exito',
