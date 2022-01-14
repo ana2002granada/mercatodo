@@ -17,6 +17,9 @@ class Permissions
     public const USERS_UPDATE = 'users_update';
     public const USERS_DELETE = 'users_delete';
     public const USERS_TOGGLE = 'user_toggle';
+    public const CATEGORIES_CREATE = 'categories_create';
+    public const CATEGORIES_UPDATE = 'categories_update';
+    public const CATEGORIES_DELETE = 'categories_delete';
 
     public static function getAll(): array
     {

@@ -10,5 +10,4 @@ use Tests\TestCase;
 class IndexCategoriesTest extends testCase
 {
     use RefreshDatabase;
-
 }

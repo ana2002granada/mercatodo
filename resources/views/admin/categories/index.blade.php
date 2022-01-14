@@ -1,6 +1,11 @@
 <x-app-layout>
     <div class=" flex items-center justify-between pb-2">
         <h1 class="text-gray-600 font-bold text-2xl">{{trans('dashboard.categories')}}</h1>
+        @can('create', \App\Models\Category::class)
+        <a href="{{route('categories.create')}}"  class="flex self-center gap-2 font-semibold rounded-2xl px-4 py-1 shadow-md bg-green-500 hover:bg-green-400 ">
+            <em class="fas fa-plus-circle self-center"></em> {{trans('users.actions.create')}}
+        </a>
+        @endcan
     </div>
             <div class="relative m-3 flex flex-wrap gap-4 mx-auto justify-center">
                 @foreach($categories as $category)
@@ -16,21 +21,20 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <x-dropdown-link>
-                                        {{trans('users.actions.update')}}
-                                    </x-dropdown-link>
-
-                                    <x-dropdown-link>
-                                        <form action="" method="POST">
-                                            @csrf
-                                            <button type='submit'>DISABLED</button>
-                                        </form>
-                                    </x-dropdown-link>
-                                    <x-dropdown-link>
-                                        <button @click="$root.$emit('open-modal')">
-                                            {{trans('users.actions.delete')}}
-                                        </button>
-                                    </x-dropdown-link>
+                                    @can('update', $category)
+                                        <x-dropdown-link :href="route('categories.edit', $category)">
+                                            {{trans('users.actions.update')}}
+                                        </x-dropdown-link>
+                                    @endcan
+                                    @if(!$category->products->count())
+                                        @can('delete', $category)
+                                            <x-dropdown-link>
+                                                <button @click="$root.$emit('open-modal', {'route': '{{route('categories.destroy', $category)}}'})">
+                                                    {{trans('users.actions.delete')}}
+                                                </button>
+                                            </x-dropdown-link>
+                                        @endcan
+                                    @endif
                                 </x-slot>
                             </x-dropdown>
                         </div>
@@ -49,4 +53,5 @@
                 @endforeach
             </div>
             {{ $categories->onEachSide(5)->links() }}
+    <x-delete-modal description="{{trans('categories.sure_delete_description')}}" />
 </x-app-layout>

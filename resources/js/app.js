@@ -6,6 +6,7 @@ import Alpine from 'alpinejs';
 import Alert from "./components/Alert";
 import Dropdown from "./components/Dropdown";
 import DeleteModal from "./components/DeleteModal";
+import InputImage from "./components/InputImage";
 
 window.Alpine = Alpine;
 
@@ -18,6 +19,7 @@ window.events = new Vue();
 Vue.component('alert', Alert);
 Vue.component('dropdown', Dropdown);
 Vue.component("modal", DeleteModal);
+Vue.component("input-image", InputImage);
 
 new Vue({
     el: '#app',

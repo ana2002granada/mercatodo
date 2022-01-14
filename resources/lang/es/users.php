@@ -16,6 +16,7 @@ return [
         'edit' => 'Editar usuario',
         'more' => 'Mas',
         'show' => 'Ver',
+        'create' => 'Crear',
         'update' => 'Actualizar',
         'delete' => 'Eliminar',
         'success' => 'Acción realizada con exito',
