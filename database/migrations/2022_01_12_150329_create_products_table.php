@@ -10,15 +10,20 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name', 100);
+            $table->string('description', 255);
+            $table->uuid('uuid')->unique();
+            $table->string('image');
             $table->decimal('price');
-            $table->decimal('stock');
-            $table->decimal('discount')->nullable();
+            $table->unsignedInteger('stock');
             $table->timestamps();
             $table->timestamp('disabled_at')->nullable();
         });
+        DB::statement('
+                create fulltext index products_name_description_fulltext
+                on products(name, description);
+            ');
     }
 
     public function down(): void

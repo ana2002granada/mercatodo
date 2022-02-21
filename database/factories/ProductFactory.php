@@ -11,10 +11,13 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+            'uuid' => $this->faker->uuid(),
             'category_id' => Category::factory()->create()->id,
             'name' => $this->faker->name(),
             'price' => 2000.86,
             'stock' => 20,
+            'image' => $this->faker->imageUrl(),
+            'description' => $this->faker->text(100),
         ];
     }
 
