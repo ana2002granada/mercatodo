@@ -30,7 +30,8 @@ class ProductsController extends Controller
         $this->authorize('create', Product::class);
         $product = Product::storeOrUpdateProduct($request);
 
-        return redirect($product->showRoute());
+        return redirect($product->showRoute())
+            ->with('success', trans('users.actions.success'));
     }
 
     public function show(Product $product): View
@@ -50,7 +51,8 @@ class ProductsController extends Controller
         $this->authorize('update', $product);
         $product = Product::storeOrUpdateProduct($request, $product);
 
-        return response()->redirectTo($product->showRoute());
+        return response()->redirectTo($product->showRoute())
+            ->with('success', trans('users.actions.success'));
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -59,7 +61,8 @@ class ProductsController extends Controller
         Storage::delete($product->image);
         $product->delete();
 
-        return response()->redirectTo(Product::indexRoute());
+        return response()->redirectTo(Product::indexRoute())
+            ->with('success', trans('users.actions.success'));
     }
 
     public function toggle(Product $product): RedirectResponse
@@ -67,6 +70,7 @@ class ProductsController extends Controller
         $this->authorize('toggle', $product);
         $product->disabled_at = $product->disabled_at ? null : now();
         $product->save();
-        return response()->redirectTo(Product::indexRoute())->with('success', 'El producto se ha actualizado correctamente');
+        return response()->redirectTo(Product::indexRoute())
+            ->with('success', 'El producto se ha actualizado correctamente');
     }
 }

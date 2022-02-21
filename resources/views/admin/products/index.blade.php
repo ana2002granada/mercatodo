@@ -14,9 +14,9 @@
                 <table class="bg-white min-w-full leading-normal">
                     <thead>
                         <tr class="bg-gray-200 border-b-2 border-gray-300 text-left text-xs text-gray-600 uppercase ">
-                            <th scope="col" class="px-5 py-3">{{trans('register.name')}}</th>
-                            <th scope="col" class="px-5 py-3">{{trans('categories.category')}}</th>
-                            <th scope="col" class="px-5 py-3">{{trans('users.info.status')}}</th>
+                            <th scope="col" class="px-5 py-3">{{ trans('register.name') }}</th>
+                            <th scope="col" class="px-5 py-3">{{ trans('categories.category') }}</th>
+                            <th scope="col" class="px-5 py-3">{{ trans('users.info.status') }}</th>
                             <th scope="col" class="px-5 py-3"></th>
                         </tr>
                     </thead>
@@ -27,7 +27,7 @@
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-full h-full rounded-full"
-                                                 src="{{$product->image_route}}"
+                                                 src="{{ $product->image_route }}"
                                                  alt=" {{ $product->name }}" />
                                         </div>
                                         <div class="ml-4">
@@ -48,10 +48,10 @@
                                 <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                     @if($product->disabled_at === null)
                                         <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">{{trans('users.actions.active')}}</span>
+                                        <span class="relative">{{ trans('users.actions.active') }}</span>
                                     @else
                                         <span aria-hidden class="absolute inset-0 bg-red-400 opacity-50 rounded-full"></span>
-                                        <span class="relative">{{trans('users.actions.inactive')}}</span>
+                                        <span class="relative">{{ trans('users.actions.inactive') }}</span>
                                     @endif
 									</span>
                                 </td>
@@ -67,12 +67,12 @@
                                             <x-slot name="content">
                                                 @can('view', $product)
                                                     <x-dropdown-link :href="$product->showRoute()">
-                                                        {{trans('users.actions.more')}}
+                                                        {{ trans('users.actions.more') }}
                                                     </x-dropdown-link>
                                                 @endcan
                                                 @can('update', $product)
                                                     <x-dropdown-link :href="$product->editRoute()">
-                                                        {{trans('users.actions.update')}}
+                                                        {{ trans('users.actions.update') }}
                                                     </x-dropdown-link>
                                                 @endcan
                                                 @can('toggle', $product)
@@ -86,7 +86,7 @@
                                                 @can('delete', $product)
                                                     <x-dropdown-link>
                                                         <button @click="$root.$emit('open-modal', {'route': '{{ $product->deleteRoute() }}'})">
-                                                            {{trans('users.actions.delete')}}
+                                                            {{ trans('users.actions.delete') }}
                                                         </button>
                                                     </x-dropdown-link>
                                                 @endcan
@@ -101,13 +101,13 @@
                 {{ $products->onEachSide(5)->links() }}
                 @else
                     <div class="bg-white shadow-md rounded-2xl p-14  ">
-                        <h2 class="text-gray-600 flex self-center justify-center font-bold text-2xl col-span-2">{{trans('categories.void.void')}}</h2>
+                        <h2 class="text-gray-600 flex self-center justify-center font-bold text-2xl col-span-2">{{ trans('categories.void.void') }}</h2>
                     </div>
                 @endif
             </div>
         </div>
     </div>
-    <x-delete-modal description="{{trans('categories.sure_delete_description')}}" />
+    <x-delete-modal description="{{ trans('categories.sure_delete_description') }}" />
 </x-app-layout>
 
 

@@ -7,5 +7,8 @@ return [
     'void' => [
         'void' => 'No tenemos productos para mostrar',
         'voidCategory' => 'No tenemos productos para mostrar en esta categoría',
-    ]
+    ],
+    'error' => [
+        'no_void' => 'No es posible eliminar la categoría porque tiene productos asociados',
+    ],
 ];

@@ -1,9 +1,9 @@
 <x-app-layout>
     <div class=" flex items-center justify-between pb-2">
-        <h1 class="text-gray-700 font-semibold text-2xl font-medium">{{trans('dashboard.categories')}}</h1>
+        <h1 class="text-gray-700 font-semibold text-2xl font-medium">{{ trans('dashboard.categories') }}</h1>
         @can('create', \App\Models\Category::class)
         <a href="{{App\Models\Category::createRoute()}}"  class="flex self-center gap-2 font-semibold rounded-2xl px-4 py-1 shadow-md bg-green-500 hover:bg-green-400 ">
-            <em class="fas fa-plus-circle self-center"></em> {{trans('users.actions.create')}}
+            <em class="fas fa-plus-circle self-center"></em> {{ trans('users.actions.create') }}
         </a>
         @endcan
     </div>
@@ -14,9 +14,9 @@
                 <table class="bg-white min-w-full leading-normal">
                     <thead>
                         <tr class="bg-gray-200 border-b-2 border-gray-300 text-left text-xs text-gray-600 uppercase ">
-                            <th scope="col" class="px-5 py-3">{{trans('register.name')}}</th>
-                            <th scope="col" class="px-5 py-3">{{trans('users.info.status')}}</th>
-                            <th scope="col" class="px-5 py-3 flex items-center justify-center">{{trans('categories.products')}}</th>
+                            <th scope="col" class="px-5 py-3">{{ trans('register.name') }}</th>
+                            <th scope="col" class="px-5 py-3">{{ trans('users.info.status') }}</th>
+                            <th scope="col" class="px-5 py-3 flex items-center justify-center">{{ trans('categories.products') }}</th>
                             <th scope="col" class="px-5 py-3"></th>
                         </tr>
                     </thead>
@@ -42,10 +42,10 @@
                                 <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                     @if($category->disabled_at === null)
                                         <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">{{trans('users.actions.active')}}</span>
+                                        <span class="relative">{{ trans('users.actions.active') }}</span>
                                     @else
                                         <span aria-hidden class="absolute inset-0 bg-red-400 opacity-50 rounded-full"></span>
-                                        <span class="relative">{{trans('users.actions.inactive')}}</span>
+                                        <span class="relative">{{ trans('users.actions.inactive') }}</span>
                                     @endif
 									</span>
                                 </td>
@@ -69,26 +69,26 @@
                                             <x-slot name="content">
                                                 @can('view', $category)
                                                     <x-dropdown-link :href="$category->showRoute()">
-                                                        {{trans('users.actions.more')}}
+                                                        {{ trans('users.actions.more') }}
                                                     </x-dropdown-link>
                                                 @endcan
                                                 @can('update', $category)
                                                     <x-dropdown-link :href="$category->editRoute()">
-                                                        {{trans('users.actions.update')}}
+                                                        {{ trans('users.actions.update') }}
                                                     </x-dropdown-link>
                                                 @endcan
                                                 @can('toggle', $category)
                                                     <x-dropdown-link>
                                                         <form action="{{ $category->toggleRoute() }}" method="POST">
                                                             @csrf
-                                                            <button type='submit'>{{$category->disabled_at ? trans('users.actions.enable') : trans('users.actions.disable')}}</button>
+                                                            <button type='submit'>{{ $category->disabled_at ? trans('users.actions.enable') : trans('users.actions.disable') }}</button>
                                                         </form>
                                                     </x-dropdown-link>
                                                 @endcan
                                                 @can('delete', $category)
                                                     <x-dropdown-link>
-                                                        <button @if($category->products_count) disabled class="text-gray-400 cursor-default" @endif @click="$root.$emit('open-modal', {'route': '{{$category->deleteRoute()}}'})">
-                                                            {{trans('users.actions.delete')}}
+                                                        <button @if($category->products_count) disabled class="text-gray-400 cursor-default" @endif @click="$root.$emit('open-modal', {'route': '{{ $category->deleteRoute() }}'})">
+                                                            {{ trans('users.actions.delete') }}
                                                         </button>
                                                     </x-dropdown-link>
                                                 @endcan
@@ -103,13 +103,13 @@
                 {{ $categories->onEachSide(5)->links() }}
                 @else
                     <div class="bg-white shadow-md rounded-2xl p-14  ">
-                        <h2 class="text-gray-600 flex self-center justify-center font-bold text-2xl col-span-2">{{trans('categories.void.voidCategory')}}</h2>
+                        <h2 class="text-gray-600 flex self-center justify-center font-bold text-2xl col-span-2">{{ trans('categories.void.voidCategory') }}</h2>
                     </div>
                 @endif
             </div>
         </div>
     </div>
-    <x-delete-modal description="{{trans('categories.sure_delete_description')}}" />
+    <x-delete-modal description="{{ trans('categories.sure_delete_description') }}" />
 </x-app-layout>
 
 

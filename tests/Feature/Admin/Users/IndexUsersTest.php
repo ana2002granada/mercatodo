@@ -12,7 +12,7 @@ class IndexUsersTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithoutCanNotListUsers()
+    public function testAnUserWithoutCanNotListUsers(): void
     {
         $user = User::factory()->create();
 

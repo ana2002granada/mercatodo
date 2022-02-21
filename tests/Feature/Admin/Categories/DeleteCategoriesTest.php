@@ -13,7 +13,7 @@ class DeleteCategoriesTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissonsCanDeleteACategory()
+    public function testAnUserWithPermissonsCanDeleteACategory(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -28,7 +28,7 @@ class DeleteCategoriesTest extends testCase
         $this->assertEmpty($category->fresh());
     }
 
-    public function testAnUserWithoutPermissionsCanNotDeleteACategory()
+    public function testAnUserWithoutPermissionsCanNotDeleteACategory(): void
     {
         $user = User::factory()->create();
         $this->actingAs($user);

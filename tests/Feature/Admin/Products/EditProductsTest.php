@@ -13,7 +13,7 @@ class EditProductsTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissionsCanSeeProductEditForm()
+    public function testAnUserWithPermissionsCanSeeProductEditForm(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -28,7 +28,7 @@ class EditProductsTest extends testCase
         $response->assertSessionHasNoErrors();
     }
 
-    public function testAnUserWithoutPermissionsCanNotSeeProductEditForm()
+    public function testAnUserWithoutPermissionsCanNotSeeProductEditForm(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);

@@ -13,7 +13,7 @@ class CreateCategoriesTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissionsCanSeeCategoryCreateForm()
+    public function testAnUserWithPermissionsCanSeeCategoryCreateForm(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -27,7 +27,7 @@ class CreateCategoriesTest extends testCase
         $response->assertSessionHasNoErrors();
     }
 
-    public function testAnUserWithoutPermissionsCanNotSeeCategoryCreateForm()
+    public function testAnUserWithoutPermissionsCanNotSeeCategoryCreateForm(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);

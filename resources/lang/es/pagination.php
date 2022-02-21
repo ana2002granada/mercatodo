@@ -8,4 +8,5 @@ return [
     'to' => 'hasta',
     'of' => 'de',
     'results' => 'resultados',
+
 ];

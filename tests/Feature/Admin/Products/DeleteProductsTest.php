@@ -13,7 +13,7 @@ class DeleteProductsTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissionsCanDeleteAProduct()
+    public function testAnUserWithPermissionsCanDeleteAProduct(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -28,7 +28,7 @@ class DeleteProductsTest extends testCase
         $this->assertEmpty($product->fresh());
     }
 
-    public function testAnUserWithoutPermissionsCanNotDeleteAProduct()
+    public function testAnUserWithoutPermissionsCanNotDeleteAProduct(): void
     {
         $user = User::factory()->create();
         $this->actingAs($user);

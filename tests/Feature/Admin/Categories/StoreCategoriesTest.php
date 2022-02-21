@@ -18,7 +18,7 @@ class StoreCategoriesTest extends testCase
     use RefreshDatabase;
     use WithFaker;
 
-    public function testAnUserWithPermissionsCanCreateACategory()
+    public function testAnUserWithPermissionsCanCreateACategory(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -37,7 +37,7 @@ class StoreCategoriesTest extends testCase
         $response->assertSessionHasNoErrors();
     }
 
-    public function testAnUserWithPermissionsCannotCreateACategoryWithInvalidData()
+    public function testAnUserWithPermissionsCannotCreateACategoryWithInvalidData(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -56,7 +56,7 @@ class StoreCategoriesTest extends testCase
         $response->assertSessionHasErrors();
     }
 
-    public function testAnUserWithoutPermissionsCanNotCreateACategory()
+    public function testAnUserWithoutPermissionsCanNotCreateACategory(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);

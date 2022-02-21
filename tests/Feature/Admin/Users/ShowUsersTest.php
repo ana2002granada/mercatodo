@@ -11,7 +11,8 @@ use Tests\TestCase;
 class ShowUsersTest extends testCase
 {
     use RefreshDatabase;
-    public function testAnUserWithPermissionsCanSeeAnUsersDetail()
+
+    public function testAnUserWithPermissionsCanSeeAnUsersDetail(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
@@ -25,7 +26,7 @@ class ShowUsersTest extends testCase
         $response->assertViewHas('user');
         $response->assertSessionHasNoErrors();
     }
-    public function testAnUserWithoutPermissionsCanNotSeeAnUsersDetail()
+    public function testAnUserWithoutPermissionsCanNotSeeAnUsersDetail(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get(route('admin.users.show', $user));

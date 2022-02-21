@@ -11,7 +11,7 @@ use Tests\TestCase;
 class EditUsersTest extends testCase
 {
     use RefreshDatabase;
-    public function testAnUserWithPermissionsCanSeeEditUsersForm()
+    public function testAnUserWithPermissionsCanSeeEditUsersForm(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
@@ -25,7 +25,7 @@ class EditUsersTest extends testCase
         $response->assertViewHas('user');
     }
 
-    public function testAnUserWithoutPermissionsCanNotSeeEditUsersForm()
+    public function testAnUserWithoutPermissionsCanNotSeeEditUsersForm(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get(route('admin.users.edit', $user));

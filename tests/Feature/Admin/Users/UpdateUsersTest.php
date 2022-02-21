@@ -12,7 +12,7 @@ class UpdateUsersTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissionsCanUpdateUsers()
+    public function testAnUserWithPermissionsCanUpdateUsers(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
@@ -33,7 +33,7 @@ class UpdateUsersTest extends testCase
         $this->assertEquals($data['email'], $user->email);
     }
 
-    public function testAnUserWithoutPermissionsCanNotUpdateUsers()
+    public function testAnUserWithoutPermissionsCanNotUpdateUsers(): void
     {
         $user = User::factory()->create();
 
@@ -46,7 +46,7 @@ class UpdateUsersTest extends testCase
         $response->assertForbidden();
     }
 
-    public function testAnUserWithPermissionsCanNotUpdateWithAExistEmail()
+    public function testAnUserWithPermissionsCanNotUpdateWithAExistEmail(): void
     {
         $userExist = User::factory()->create();
         $data = [

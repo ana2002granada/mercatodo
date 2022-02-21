@@ -32,7 +32,8 @@ class CategoriesController extends Controller
         $this->authorize('create', Category::class);
         $category = Category::storeOrUpdateCategory($request);
 
-        return redirect($category->showRoute());
+        return redirect($category->showRoute())
+            ->with('success', trans('users.actions.success'));
     }
 
     public function show(Category $category): View
@@ -52,20 +53,23 @@ class CategoriesController extends Controller
         $this->authorize('update', $category);
         $category = Category::storeOrUpdateCategory($request, $category);
 
-        return response()->redirectTo($category->showRoute());
+        return response()->redirectTo($category->showRoute())
+            ->with('success', trans('users.actions.success'));
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $this->authorize('delete', $category);
         if ($category->products_count) {
-            return response()->redirectTo(Category::indexRoute())->with('error', 'No es posible eliminar la categoría porque tiene productos asociados');
+            return response()->redirectTo(Category::indexRoute())
+                ->with('error', trans('categories.error.no_void'));
         }
 
         Storage::delete($category->image);
         $category->delete();
 
-        return response()->redirectTo(Category::indexRoute());
+        return response()->redirectTo(Category::indexRoute())
+            ->with('success', trans('users.actions.success'));
     }
 
     public function toggle(Category $category): RedirectResponse
@@ -73,6 +77,7 @@ class CategoriesController extends Controller
         $this->authorize('toggle', $category);
         $category->disabled_at = $category->disabled_at ? null : now();
         $category->save();
-        return response()->redirectTo(Category::indexRoute())->with('success', trans('users.actions.success'));
+        return response()->redirectTo(Category::indexRoute())
+            ->with('success', trans('users.actions.success'));
     }
 }

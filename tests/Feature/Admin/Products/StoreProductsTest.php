@@ -17,7 +17,7 @@ class StoreProductsTest extends testCase
     use RefreshDatabase;
     use WithFaker;
 
-    public function testAnUserWithPermissionsCanCreateAProduct()
+    public function testAnUserWithPermissionsCanCreateAProduct(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -40,7 +40,7 @@ class StoreProductsTest extends testCase
         $response->assertSessionHasNoErrors();
     }
 
-    public function testAnUserWithPermissionsCannotCreateAProductWithInvalidData()
+    public function testAnUserWithPermissionsCannotCreateAProductWithInvalidData(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -59,7 +59,7 @@ class StoreProductsTest extends testCase
         $response->assertSessionHasErrors();
     }
 
-    public function testAnUserWithoutPermissionsCanNotCreateAProduct()
+    public function testAnUserWithoutPermissionsCanNotCreateAProduct(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);

@@ -5,7 +5,7 @@
         </h1>
     </div>
     <a href="{{ \App\Models\Product::indexRoute() }}" class="bg-primary-500 rounded-2xl text-black font-semibold shadow-md px-4 py-1 flex self-center gap-2 hover:bg-primary-400">
-        <em class="fas fa-arrow-circle-left flex self-center"></em> {{trans('dashboard.back')}}
+        <em class="fas fa-arrow-circle-left flex self-center"></em> {{ trans('dashboard.back') }}
     </a>
 </div>
 
@@ -14,7 +14,7 @@
         <div class="flex content-center gap-6">
             <div class="flex-shrink-0 w-24 h-24">
                 <img class="w-full h-full rounded-full"
-                     src="{{$product->image_route}}"
+                     src="{{ $product->image_route }}"
                      alt="{{ $product->name }}" />
             </div>
             <div class="flex flex-col justify-center">
@@ -25,7 +25,7 @@
         </div>
     </div>
 @endif
-<form action="{{$route}}" method="POST" enctype="multipart/form-data" class="p-5 shadow-md  bg-white rounded-xl mt-4">
+<form action="{{ $route }}" method="POST" enctype="multipart/form-data" class="p-5 shadow-md  bg-white rounded-xl mt-4">
     @csrf
     @if($isEdit)
         @method('PATCH')
@@ -44,7 +44,7 @@
         </div>
         <div>
             <x-label for="name" :value="trans('register.name')" />
-            <x-input id="name" value="{{$product->name}}" class="block w-full" type="text" name="name" required />
+            <x-input id="name" value="{{ $product->name }}" class="block w-full" type="text" name="name" required />
             @error('name')
                 <span class="text-red-600">
                     <em class="mr-2 fas fa-info-circle"></em>{{ $message }}
@@ -54,7 +54,7 @@
         </div>
         <div>
             <x-label for="price" :value="trans('products.price')" />
-            <x-input id="price" value="{{$product->price}}" class="block w-full" type="number" min="0" name="price" required />
+            <x-input id="price" value="{{ $product->price }}" class="block w-full" type="number" min="0" name="price" required />
             @error('price')
                 <span class="text-red-600">
                     <em class="mr-2 fas fa-info-circle"></em>{{ $message }}
@@ -63,7 +63,7 @@
         </div>
         <div>
             <x-label for="stock" :value="trans('products.stock')" />
-            <x-input id="stock" value="{{$product->stock}}" class="block w-full" type="number" min="0" name="stock" required />
+            <x-input id="stock" value="{{ $product->stock }}" class="block w-full" type="number" min="0" name="stock" required />
             @error('stock')
                 <span class="text-red-600">
                     <em class="mr-2 fas fa-info-circle"></em>{{ $message }}
@@ -72,7 +72,7 @@
         </div>
         <div>
             <x-label for="description" :value="trans('products.description')" />
-            <textarea id="description" maxlength="255" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" name="description" rows="4" required>{{$product->description}}</textarea>
+            <textarea id="description" maxlength="255" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" name="description" rows="4" required>{{ $product->description }}</textarea>
             @error('description')
                 <span class="text-red-600">
                     <em class="mr-2 fas fa-info-circle"></em>{{ $message }}

@@ -19,7 +19,7 @@ class UpdateProductsTest extends testCase
     use RefreshDatabase;
     use WithFaker;
 
-    public function testAnUserWithPermissionsCanUpdateAProduct()
+    public function testAnUserWithPermissionsCanUpdateAProduct(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -43,7 +43,7 @@ class UpdateProductsTest extends testCase
         $this->assertDatabaseHas('Products', ['name' => $data['name']]);
     }
 
-    public function testAnUserWithPermissionsCannotUpdateAProductWithInvalidData()
+    public function testAnUserWithPermissionsCannotUpdateAProductWithInvalidData(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
@@ -59,7 +59,7 @@ class UpdateProductsTest extends testCase
         $response->assertSessionHasErrors();
     }
 
-    public function testAnUserWithoutPermissionsCanNotCreateAProduct()
+    public function testAnUserWithoutPermissionsCanNotCreateAProduct(): void
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
