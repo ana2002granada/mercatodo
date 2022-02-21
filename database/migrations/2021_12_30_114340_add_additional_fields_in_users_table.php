@@ -9,8 +9,8 @@ class AddAdditionalFieldsInUsersTable extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('last_name')->after('name');
-            $table->string('phone_number')->after('email')->nullable();
+            $table->string('last_name', 100)->after('name');
+            $table->string('phone_number', 10)->after('email')->nullable();
             $table->timestamp('disabled_at')->nullable();
         });
     }

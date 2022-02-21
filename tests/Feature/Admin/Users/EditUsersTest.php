@@ -11,24 +11,24 @@ use Tests\TestCase;
 class EditUsersTest extends testCase
 {
     use RefreshDatabase;
-    public function testAnUserWithPermissionsCanSeeEditUsersForm()
+    public function testAnUserWithPermissionsCanSeeEditUsersForm(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
             Permission::findOrCreate(Permissions::USERS_UPDATE)
         );
         $user = User::factory()->create();
-        $response = $this->actingAs($userAdmin)->get(route('users.edit', $user));
+        $response = $this->actingAs($userAdmin)->get(route('admin.users.edit', $user));
 
         $response->assertOk();
         $response->assertViewIs('admin.users.edit');
         $response->assertViewHas('user');
     }
 
-    public function testAnUserWithoutPermissionsCanNotSeeEditUsersForm()
+    public function testAnUserWithoutPermissionsCanNotSeeEditUsersForm(): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get(route('users.edit', $user));
+        $response = $this->actingAs($user)->get(route('admin.users.edit', $user));
 
         $response->assertForbidden();
     }

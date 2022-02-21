@@ -3,6 +3,7 @@
 return [
     'name' => 'Nombre',
     'lastname' => 'Apellido',
+    'image' => 'Imagen',
     'email' => 'Email',
     'phone' => 'Celular',
     'password' => 'Contraseña',

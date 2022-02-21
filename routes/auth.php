@@ -8,6 +8,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Guest\CategoriesControllerGuest;
+use App\Http\Controllers\Guest\ProductsControllerGuest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -63,7 +66,14 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['enabled','auth', 'verified'])
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['enabled','auth', 'verified'])
     ->name('home');
+
+Route::get('/categories/{category}', [CategoriesControllerGuest::class, 'show'])
+    ->middleware(['enabled','auth','verified'])
+    ->name('guest.categories.show');
+
+Route::get('/products/{product}', [ProductsControllerGuest::class, 'show'])
+    ->middleware(['enabled','auth','verified'])
+    ->name('guest.products.show');

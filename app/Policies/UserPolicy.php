@@ -21,7 +21,6 @@ class UserPolicy
         return $user->can(Permissions::USERS_SHOW);
     }
 
-
     public function update(User $user): bool
     {
         return $user->can(Permissions::USERS_UPDATE);

@@ -1,6 +1,6 @@
 <template>
     <div :class="'fixed bg-' +type+'-100 border-l-4 border-' +type+'-500 text-' +type+'-700 p-4 z-10 bottom-0 right-0'" role="alert" v-show="show">
-        <p class="font-bold">{{title}}</p>
+        <p class="font-bold">{{ title }}</p>
         <p>{{ body }}</p>
     </div>
 </template>

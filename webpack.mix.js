@@ -12,8 +12,11 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js').vue({ version:2 })
-    .postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-]).version();
+    .sass('resources/sass/app.scss', 'public/css')
+    .options({
+        postCss: [
+            require('postcss-import'),
+            require('tailwindcss'),
+            require('autoprefixer')
+        ],
+    }).version();
