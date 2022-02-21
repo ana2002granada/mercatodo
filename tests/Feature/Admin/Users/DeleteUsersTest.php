@@ -12,7 +12,7 @@ class DeleteUsersTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissonsCanDeleteAnUser()
+    public function testAnUserWithPermissonsCanDeleteAnUser(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
@@ -21,22 +21,22 @@ class DeleteUsersTest extends testCase
         );
 
         $user = User::factory()->create();
-        $response = $this->actingAs($userAdmin)->delete(route('users.destroy', $user));
+        $response = $this->actingAs($userAdmin)->delete(route('admin.users.destroy', $user));
 
         $response->assertRedirect();
         $this->assertEmpty($user->fresh());
     }
 
-    public function testAnUserWithoutPermissionsCanNotDeleteAnUser()
+    public function testAnUserWithoutPermissionsCanNotDeleteAnUser(): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->delete(route('users.destroy', $user));
+        $response = $this->actingAs($user)->delete(route('admin.users.destroy', $user));
 
         $response->assertForbidden();
         $this->assertNotEmpty($user->fresh());
     }
 
-    public function testYouCanNotDeleteYourself()
+    public function testYouCanNotDeleteYourself(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
@@ -44,7 +44,7 @@ class DeleteUsersTest extends testCase
             Permission::findOrCreate(Permissions::USERS_INDEX)
         );
 
-        $response = $this->actingAs($userAdmin)->delete(route('users.destroy', $userAdmin));
+        $response = $this->actingAs($userAdmin)->delete(route('admin.users.destroy', $userAdmin));
 
         $response->assertForbidden();
         $this->assertNotEmpty($userAdmin->fresh());

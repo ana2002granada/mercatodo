@@ -9,6 +9,8 @@ return [
     'recoverPassword' => 'Recuperar Contraseña',
     'btnUpdate' => 'Actualizar',
     'users' => 'Usuarios',
+    'products' => 'Productos',
+    'categories' => 'Categorías',
     'login' => 'Iniciar sesion',
     'logout' => 'Salir',
     'error' => '¡Ups! Algo salió mal.',
@@ -18,4 +20,6 @@ return [
     'sure' => '¿Estás seguro?',
     'sure_delete_description' => 'Estás a punto de eliminar un usuario',
     'success' => 'Exito',
+    'search' => 'Buscar',
+
 ];

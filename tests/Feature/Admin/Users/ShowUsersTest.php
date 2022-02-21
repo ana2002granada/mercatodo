@@ -11,24 +11,25 @@ use Tests\TestCase;
 class ShowUsersTest extends testCase
 {
     use RefreshDatabase;
-    public function testAnUserWithPermissionsCanSeeAnUsersDetail()
+
+    public function testAnUserWithPermissionsCanSeeAnUsersDetail(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
             Permission::findOrCreate(Permissions::USERS_SHOW)
         );
         $user = User::factory()->create();
-        $response = $this->actingAs($userAdmin)->get(route('users.show', $user));
+        $response = $this->actingAs($userAdmin)->get(route('admin.users.show', $user));
 
         $response->assertOk();
         $response->assertViewIs('admin.users.show');
         $response->assertViewHas('user');
         $response->assertSessionHasNoErrors();
     }
-    public function testAnUserWithoutPermissionsCanNotSeeAnUsersDetail()
+    public function testAnUserWithoutPermissionsCanNotSeeAnUsersDetail(): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get(route('users.show', $user));
+        $response = $this->actingAs($user)->get(route('admin.users.show', $user));
 
         $response->assertForbidden();
     }

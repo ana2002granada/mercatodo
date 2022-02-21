@@ -12,7 +12,7 @@ class UpdateUsersTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissionsCanUpdateUsers()
+    public function testAnUserWithPermissionsCanUpdateUsers(): void
     {
         $userAdmin = User::factory()->create();
         $userAdmin->syncPermissions(
@@ -22,10 +22,10 @@ class UpdateUsersTest extends testCase
         $user = User::factory()->create();
 
         $data = array_merge($user->toArray(), [
-            'name' => 'A name'
+            'name' => 'name'
         ]);
 
-        $response = $this->actingAs($userAdmin)->patch(route('users.update', $user), $data);
+        $response = $this->actingAs($userAdmin)->patch(route('admin.users.update', $user), $data);
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
         $user->refresh();
@@ -33,21 +33,20 @@ class UpdateUsersTest extends testCase
         $this->assertEquals($data['email'], $user->email);
     }
 
-    public function testAnUserWithoutPermissionsCanNotUpdateUsers()
+    public function testAnUserWithoutPermissionsCanNotUpdateUsers(): void
     {
         $user = User::factory()->create();
 
         $data = array_merge($user->toArray(), [
-            'name' => 'A name',
+            'name' => 'Aname',
             'disabled_at' => false
         ]);
 
-
-        $response = $this->actingAs($user)->patch(route('users.update', $user), $data);
+        $response = $this->actingAs($user)->patch(route('admin.users.update', $user), $data);
         $response->assertForbidden();
     }
 
-    public function testAnUserWithPermissionsCanNotUpdateWithAExistEmail()
+    public function testAnUserWithPermissionsCanNotUpdateWithAExistEmail(): void
     {
         $userExist = User::factory()->create();
         $data = [
@@ -55,8 +54,11 @@ class UpdateUsersTest extends testCase
             'email' => $userExist->email,
         ];
         $user = User::factory()->create();
+        $user->syncPermissions(
+            Permission::findOrCreate(Permissions::USERS_UPDATE)
+        );
 
-        $response = $this->actingAs($user)->patch(route('users.update', $user), $data);
+        $response = $this->actingAs($user)->patch(route('admin.users.update', $user), $data);
         $response->assertRedirect();
         $response->assertSessionHasErrors(['email']);
         $user = $user->refresh();

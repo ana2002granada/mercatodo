@@ -16,7 +16,8 @@ module.exports = {
                 'bg-semi-75': 'rgba(0, 0, 0, 0.75)',
 
                 primary: {
-                    500: '#F8FF01'
+                    500: '#F8FF01',
+                    400: '#FAFA46FF',
                 },
             },
 

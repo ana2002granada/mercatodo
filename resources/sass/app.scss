@@ -1,6 +1,7 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~vue-select/src/scss/vue-select.scss";
 
 [v-cloak] { display:none; }
 
