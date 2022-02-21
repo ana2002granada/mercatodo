@@ -13,7 +13,7 @@ return [
         'active' => 'Activo',
         'inactive' =>'Inactivo',
         'index' => 'Lista de usuarios',
-        'edit' => 'Editar usuario',
+        'edit' => 'Editar',
         'more' => 'Mas',
         'show' => 'Ver',
         'create' => 'Crear',

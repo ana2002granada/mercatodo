@@ -11,16 +11,18 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css">
 
         <!-- Scripts -->
         <script src="https://kit.fontawesome.com/6a440e0993.js" crossorigin="anonymous"></script>
 
         @include('layouts.alerts')
     </head>
-    <body>
-        <div id="app" class="h-screen flex flex-col ">
+    <body class="bg-gray-100">
+        <div id="app" class="min-h-screen flex flex-col ">
             <x-header />
-            <div class="h-full font-sans text-gray-900 mt-28 flex flex-col">
+            {{ $search ?? '' }}
+            <div class="h-full font-sans text-gray-900 mt-24 flex flex-col">
                 {{ $slot }}
             </div>
             <alert />

@@ -20,4 +20,5 @@ return [
     'sure' => '¿Estás seguro?',
     'sure_delete_description' => 'Estás a punto de eliminar un usuario',
     'success' => 'Exito',
+    'search' => 'Buscar',
 ];
