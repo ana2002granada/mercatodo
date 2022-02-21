@@ -10,6 +10,16 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
+    public function viewAny(User $user): bool
+    {
+        return $user->can(Permissions::CATEGORIES_INDEX);
+    }
+
+    public function view(User $user): bool
+    {
+        return $user->can(Permissions::CATEGORIES_SHOW);
+    }
+
     public function create(User $user): bool
     {
         return $user->can(Permissions::CATEGORIES_CREATE);
@@ -23,5 +33,10 @@ class CategoryPolicy
     public function delete(User $user): bool
     {
         return $user->can(Permissions::CATEGORIES_DELETE);
+    }
+
+    public function toggle(User $user): bool
+    {
+        return $user->can(Permissions::CATEGORIES_TOGGLE);
     }
 }

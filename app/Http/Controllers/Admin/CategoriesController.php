@@ -2,59 +2,77 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Category\CategoryShowAction;
+use App\Helpers\PaginatorHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\FormUserRequest;
+use App\Http\Requests\Admin\FormCategoryRequest;
 use App\Models\Category;
+use App\View\Models\CategoryFormViewModel;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CategoriesController extends Controller
 {
     public function index(): View
     {
-        $categories = Category::orderBy('name')->paginate(8);
-        return view('admin.categories.index', compact('categories'), );
+        $this->authorize('viewAny', Category::class);
+        $categories = PaginatorHelper::paginate(Category::categoriesFromCache(), 8);
+        return view('admin.categories.index', compact('categories'));
     }
 
     public function create(): View
     {
-        return view('admin.categories.create');
+        $this->authorize('create', Category::class);
+        return view('admin.categories.create', new CategoryFormViewModel());
     }
 
-    public function store(Category $category): RedirectResponse
+    public function store(FormCategoryRequest $request): RedirectResponse
     {
-        $category->validate([
-            'name' => ['required', 'string', 'max:100'],
-            'image' => ['required', 'string'],
-        ]);
+        $this->authorize('create', Category::class);
+        $category = Category::storeOrUpdateCategory($request);
+
+        return redirect($category->showRoute());
     }
 
     public function show(Category $category): View
     {
-        $products = $category->products()->paginate(8);
-        return view('admin.categories.show', compact('category', 'products'));
+        $this->authorize('view', $category);
+        return view('admin.categories.show', CategoryShowAction::execute($category));
     }
 
     public function edit(Category $category): View
     {
         $this->authorize('update', $category);
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.categories.edit', new CategoryFormViewModel($category));
     }
 
-    public function update(FormUserRequest $request, Category $category): RedirectResponse
+    public function update(FormCategoryRequest $request, Category $category): RedirectResponse
     {
         $this->authorize('update', $category);
-        $category->name = $request->input('name');
-        $category->save();
+        $category = Category::storeOrUpdateCategory($request, $category);
 
-        return response()->redirectToRoute('category.index');
+        return response()->redirectTo($category->showRoute());
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $this->authorize('delete', $category);
+        if ($category->products_count) {
+            return response()->redirectTo(Category::indexRoute())->with('error', 'No es posible eliminar la categoría porque tiene productos asociados');
+        }
+
+        Storage::delete($category->image);
         $category->delete();
 
-        return response()->redirectToRoute('categories.index');
+        return response()->redirectTo(Category::indexRoute());
+    }
+
+    public function toggle(Category $category): RedirectResponse
+    {
+        $this->authorize('toggle', $category);
+        $category->disabled_at = $category->disabled_at ? null : now();
+        $category->save();
+        return response()->redirectTo(Category::indexRoute())->with('success', trans('users.actions.success'));
     }
 }

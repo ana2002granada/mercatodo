@@ -38,7 +38,7 @@ class UsersController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->save();
 
-        return response()->redirectToRoute('users.index')->with('success', trans('users.actions.success'));
+        return response()->redirectToRoute('home')->with('success', trans('users.actions.success'));
     }
 
     public function destroy(User $user): RedirectResponse
@@ -46,7 +46,7 @@ class UsersController extends Controller
         $this->authorize('delete', $user);
         $user->delete();
 
-        return response()->redirectToRoute('users.index')->with('success', trans('users.actions.success'));
+        return response()->redirectToRoute('admin.users.index')->with('success', trans('users.actions.success'));
     }
 
     public function toggle(User $user): RedirectResponse
@@ -54,6 +54,6 @@ class UsersController extends Controller
         $this->authorize('toggle', $user);
         $user->disabled_at = $user->disabled_at ? null : now();
         $user->save();
-        return response()->redirectToRoute('users.index')->with('success', trans('users.actions.success'));
+        return response()->redirectToRoute('admin.users.index')->with('success', trans('users.actions.success'));
     }
 }
