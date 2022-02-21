@@ -18,7 +18,7 @@ class ShowUsersTest extends testCase
             Permission::findOrCreate(Permissions::USERS_SHOW)
         );
         $user = User::factory()->create();
-        $response = $this->actingAs($userAdmin)->get(route('users.show', $user));
+        $response = $this->actingAs($userAdmin)->get(route('admin.users.show', $user));
 
         $response->assertOk();
         $response->assertViewIs('admin.users.show');
@@ -28,7 +28,7 @@ class ShowUsersTest extends testCase
     public function testAnUserWithoutPermissionsCanNotSeeAnUsersDetail()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get(route('users.show', $user));
+        $response = $this->actingAs($user)->get(route('admin.users.show', $user));
 
         $response->assertForbidden();
     }

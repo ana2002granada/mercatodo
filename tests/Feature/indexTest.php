@@ -35,8 +35,8 @@ class indexTest extends TestCase
     public function routeProvider(): array
     {
         return [
-            'its is for user index' => ['route' => 'users.index', 'permission' => Permissions::USERS_INDEX],
-            'its is for categories index' => ['route' => 'categories.index', 'permission' => null],
+            'its is for user index' => ['route' => 'admin.users.index', 'permission' => Permissions::USERS_INDEX],
+            'its is for categories index' => ['route' => 'admin.categories.index', 'permission' => Permissions::CATEGORIES_INDEX],
         ];
     }
 }

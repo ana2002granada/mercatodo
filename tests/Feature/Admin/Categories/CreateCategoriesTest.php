@@ -9,32 +9,29 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
-class ShowCategoriesTest extends testCase
+class CreateCategoriesTest extends testCase
 {
     use RefreshDatabase;
 
-    public function testAnUserWithPermissionsCanSeeCategoryDetail()
+    public function testAnUserWithPermissionsCanSeeCategoryCreateForm()
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
         $userAdmin->syncPermissions(
-            Permission::findOrCreate(Permissions::CATEGORIES_SHOW)
+            Permission::findOrCreate(Permissions::CATEGORIES_CREATE)
         );
-        $category = Category::factory()->create();
-        $response = $this->get(route('admin.categories.show', $category));
+        $response = $this->get(route('admin.categories.create'));
 
         $response->assertOk();
-        $response->assertViewIs('admin.categories.show');
+        $response->assertViewIs('admin.categories.create');
         $response->assertSessionHasNoErrors();
     }
 
-    public function testAnUserWithoutPermissionsCanNotSeeCategoryDetail()
+    public function testAnUserWithoutPermissionsCanNotSeeCategoryCreateForm()
     {
         $userAdmin = User::factory()->create();
         $this->actingAs($userAdmin);
-        $category = Category::factory()->create();
-        $response = $this->get(route('admin.categories.show', $category));
-
+        $response = $this->get(route('admin.categories.create'));
         $response->assertForbidden();
     }
 }

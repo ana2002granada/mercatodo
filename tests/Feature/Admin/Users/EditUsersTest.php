@@ -18,7 +18,7 @@ class EditUsersTest extends testCase
             Permission::findOrCreate(Permissions::USERS_UPDATE)
         );
         $user = User::factory()->create();
-        $response = $this->actingAs($userAdmin)->get(route('users.edit', $user));
+        $response = $this->actingAs($userAdmin)->get(route('admin.users.edit', $user));
 
         $response->assertOk();
         $response->assertViewIs('admin.users.edit');
@@ -28,7 +28,7 @@ class EditUsersTest extends testCase
     public function testAnUserWithoutPermissionsCanNotSeeEditUsersForm()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get(route('users.edit', $user));
+        $response = $this->actingAs($user)->get(route('admin.users.edit', $user));
 
         $response->assertForbidden();
     }

@@ -16,12 +16,13 @@ class DeleteCategoriesTest extends testCase
     public function testAnUserWithPermissonsCanDeleteACategory()
     {
         $userAdmin = User::factory()->create();
+        $this->actingAs($userAdmin);
         $userAdmin->syncPermissions(
             Permission::findOrCreate(Permissions::CATEGORIES_DELETE),
         );
 
         $category = Category::factory()->create();
-        $response = $this->actingAs($userAdmin)->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('admin.categories.destroy', $category));
 
         $response->assertRedirect();
         $this->assertEmpty($category->fresh());
@@ -30,8 +31,9 @@ class DeleteCategoriesTest extends testCase
     public function testAnUserWithoutPermissionsCanNotDeleteACategory()
     {
         $user = User::factory()->create();
+        $this->actingAs($user);
         $category = Category::factory()->create();
-        $response = $this->actingAs($user)->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('admin.categories.destroy', $category));
 
         $response->assertForbidden();
         $this->assertNotEmpty($category->fresh());

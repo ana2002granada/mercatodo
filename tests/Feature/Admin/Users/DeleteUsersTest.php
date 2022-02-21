@@ -21,7 +21,7 @@ class DeleteUsersTest extends testCase
         );
 
         $user = User::factory()->create();
-        $response = $this->actingAs($userAdmin)->delete(route('users.destroy', $user));
+        $response = $this->actingAs($userAdmin)->delete(route('admin.users.destroy', $user));
 
         $response->assertRedirect();
         $this->assertEmpty($user->fresh());
@@ -30,7 +30,7 @@ class DeleteUsersTest extends testCase
     public function testAnUserWithoutPermissionsCanNotDeleteAnUser()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->delete(route('users.destroy', $user));
+        $response = $this->actingAs($user)->delete(route('admin.users.destroy', $user));
 
         $response->assertForbidden();
         $this->assertNotEmpty($user->fresh());
@@ -44,7 +44,7 @@ class DeleteUsersTest extends testCase
             Permission::findOrCreate(Permissions::USERS_INDEX)
         );
 
-        $response = $this->actingAs($userAdmin)->delete(route('users.destroy', $userAdmin));
+        $response = $this->actingAs($userAdmin)->delete(route('admin.users.destroy', $userAdmin));
 
         $response->assertForbidden();
         $this->assertNotEmpty($userAdmin->fresh());

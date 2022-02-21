@@ -22,10 +22,10 @@ class UpdateUsersTest extends testCase
         $user = User::factory()->create();
 
         $data = array_merge($user->toArray(), [
-            'name' => 'A name'
+            'name' => 'name'
         ]);
 
-        $response = $this->actingAs($userAdmin)->patch(route('users.update', $user), $data);
+        $response = $this->actingAs($userAdmin)->patch(route('admin.users.update', $user), $data);
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
         $user->refresh();
@@ -38,12 +38,11 @@ class UpdateUsersTest extends testCase
         $user = User::factory()->create();
 
         $data = array_merge($user->toArray(), [
-            'name' => 'A name',
+            'name' => 'Aname',
             'disabled_at' => false
         ]);
 
-
-        $response = $this->actingAs($user)->patch(route('users.update', $user), $data);
+        $response = $this->actingAs($user)->patch(route('admin.users.update', $user), $data);
         $response->assertForbidden();
     }
 
@@ -55,8 +54,11 @@ class UpdateUsersTest extends testCase
             'email' => $userExist->email,
         ];
         $user = User::factory()->create();
+        $user->syncPermissions(
+            Permission::findOrCreate(Permissions::USERS_UPDATE)
+        );
 
-        $response = $this->actingAs($user)->patch(route('users.update', $user), $data);
+        $response = $this->actingAs($user)->patch(route('admin.users.update', $user), $data);
         $response->assertRedirect();
         $response->assertSessionHasErrors(['email']);
         $user = $user->refresh();

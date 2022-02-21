@@ -16,7 +16,7 @@ class IndexUsersTest extends testCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('users.index'));
+        $response = $this->actingAs($user)->get(route('admin.users.index'));
         $response->assertForbidden();
     }
 }
