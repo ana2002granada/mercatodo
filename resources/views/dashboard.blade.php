@@ -64,7 +64,7 @@
             @forelse($products as $product)
                 <div class="inline-block bg-white w-64 h-64 p-1 relative align-middle justify-center rounded-lg shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-xl transition-shadow ease-in p-2">
                     <div class="gap-2 flex px-2 self-center w-full items-end justify-end h-40 rounded-xl w-11/12 bg-cover" style="background-image: url('{{$product->image_route}}')">
-                        <button class="flex items-center justify-center p-2 rounded-full bg-green-500 text-white h-10 w-10 -mb-4 hover:bg-green-700 focus:outline-none focus:bg-green-700">
+                        <button @click="$root.$emit('add-product', {{ json_encode($product, true) }})" class="flex items-center justify-center p-2 rounded-full bg-green-500 text-white h-10 w-10 -mb-4 hover:bg-green-700 focus:outline-none focus:bg-green-700">
                             <em class="fas fa-cart-plus"></em>
                         </button>
                         <a href="{{ route('guest.products.show', $product) }}" class="flex items-center justify-center p-2 rounded-full bg-gray-500 text-white h-10 w-10 -mb-4 hover:bg-gray-700 focus:outline-none text-white focus:bg-gray-700">

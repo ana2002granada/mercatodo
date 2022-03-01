@@ -15,7 +15,7 @@ class RegisterProductLog
             'id' => $event->product->id,
             'name' => $event->product->name,
             'category' => $event->product->category->name,
-            'user' => $event->user->email,
+            'user' => optional($event->user)->email,
             'date' => now(),
         ]);
     }

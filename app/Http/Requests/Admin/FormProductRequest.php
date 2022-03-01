@@ -17,8 +17,8 @@ class FormProductRequest extends FormRequest
             'name' => 'required|string|max:100|unique:products,name' . ($this->route('product') ? ',' . $this->route('product')->getKey() : ''),
             'description' => 'required|string|max:255',
             'image' => $this->route('product') ? 'sometimes|nullable' : 'required',
-            'price' => 'required|string',
-            'stock' => 'required|numeric',
+            'price' => 'required|string|min:0',
+            'stock' => 'required|numeric|min:0',
         ];
     }
 }

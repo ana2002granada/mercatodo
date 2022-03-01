@@ -16,7 +16,7 @@ class DashboardController extends Controller
             ->categoryFilter($request->get('category'))
             ->search($request->get('search'))
             ->orderBy('name')
-            ->paginate(8);
+            ->paginate(2);
 
         $categories = Category::active()->nameField($request->get('search'))->orderBy('name')->get();
         return view('dashboard', compact('products', 'categories'));

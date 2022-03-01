@@ -1,5 +1,5 @@
 <template>
-    <div :class="'fixed bg-' +type+'-100 border-l-4 border-' +type+'-500 text-' +type+'-700 p-4 z-10 bottom-0 right-0'" role="alert" v-show="show">
+    <div :class="'fixed bg-' +type+'-100 border-l-4 border-' +type+'-500 text-' +type+'-700 p-4 z-50 bottom-16 right-0'" role="alert" v-show="show">
         <p class="font-bold">{{ title }}</p>
         <p>{{ body }}</p>
     </div>
@@ -29,6 +29,11 @@ export default {
           })
         }
     },
+    mounted() {
+        this.$root.$on('show-alert', (data) => {
+            this.flash(data.type, data.title, data.message)
+        })
+    },
     methods: {
         flash(type,title,message) {
             this.show = true
@@ -45,7 +50,7 @@ export default {
         },
         hide() {
             this.show = false
-        }
+        },
     }
 }
 </script>

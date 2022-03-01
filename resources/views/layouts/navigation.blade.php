@@ -19,6 +19,9 @@
                     {{ trans('categories.products') }}
                 </x-nav-link>
             @endcan
+            <x-nav-link>
+                <v-cart />
+            </x-nav-link>
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
 
