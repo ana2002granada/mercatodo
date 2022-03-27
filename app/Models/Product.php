@@ -46,7 +46,7 @@ class Product extends Model
         return '/storage/' . $this->image;
     }
 
-    public function getAmountAttribute()
+    public function getAmountAttribute(): string
     {
         return MoneyHelper::convert($this->price);
     }
@@ -69,6 +69,11 @@ class Product extends Model
                 match(name, description)
                 against(? in natural language mode) > 0.0000001
             ', [$search]);
+    }
+
+    public function scopeWithStock(Builder $query): Builder
+    {
+        return $query->where('stock', '>', 0);
     }
 
     public function scopeCategoryName(Builder $query, ?string $search): Builder
