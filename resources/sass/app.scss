@@ -3,7 +3,9 @@
 @tailwind utilities;
 @import "~vue-select/src/scss/vue-select.scss";
 
-[v-cloak] { display:none; }
+[v-cloak] {
+    display: none;
+}
 
 .modal-mask {
     position: fixed;
