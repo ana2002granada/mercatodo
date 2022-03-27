@@ -96,4 +96,5 @@ Route::get('my-payments/{payment}', [PaymentController::class, 'show'])
     ->name('my-payments.payment');
 
 Route::middleware(['enabled','auth','verified'])->get('/payment/reload/{payment}', [PaymentController::class, 'reload'])
+    ->middleware(['enabled','auth','verified'])
     ->name('payment.reload');
