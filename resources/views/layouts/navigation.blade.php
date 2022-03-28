@@ -4,6 +4,9 @@
             <x-nav-link :href="route('home')" :active="request()->routeIs('home')||request()->routeIs('guest.*')">
                 {{ trans('dashboard.home') }}
             </x-nav-link>
+            <x-nav-link :href="App\Models\Payment::myPaymentsRoute()" :active="request()->routeIs('my-payments.*')">
+                My Payment
+            </x-nav-link>
             @can('viewAny', App\Models\User::class)
                 <x-nav-link :href="App\Models\User::indexRoute()" :active="request()->routeIs('admin.users.*')">
                     {{ trans('dashboard.users') }}
@@ -19,6 +22,9 @@
                     {{ trans('categories.products') }}
                 </x-nav-link>
             @endcan
+            <x-nav-link>
+                <v-cart />
+            </x-nav-link>
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
 

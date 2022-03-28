@@ -13,6 +13,9 @@
                 <span class="text-md font-semibold text-gray-500 mb-0 truncate">
                     {{ $product->amount }}
                 </span>
+                <span class="text-md font-semibold text-gray-500 mb-0 truncate">
+                    CANT: {{ $product->stock }}
+                </span>
             </div>
         </div>
         <div class="flex gap-3">

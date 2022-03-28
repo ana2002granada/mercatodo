@@ -14,9 +14,9 @@ class CategoriesChanged
 
     public string $action;
     public Category $category;
-    public User $user;
+    public ?User $user;
 
-    public function __construct(string $action, Category $category, User $user)
+    public function __construct(string $action, Category $category, ?User $user)
     {
         $this->action = $action;
         $this->category = $category;

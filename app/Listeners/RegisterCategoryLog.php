@@ -12,7 +12,7 @@ class RegisterCategoryLog
         Log::info('Category ' . $event->action, [
             'id' => $event->category->id,
             'name' => $event->category->name,
-            'user' => $event->user->email,
+            'user' => optional($event->user)->email,
             'date' => now(),
         ]);
     }

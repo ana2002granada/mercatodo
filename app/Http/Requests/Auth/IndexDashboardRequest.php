@@ -16,7 +16,7 @@ class IndexDashboardRequest extends FormRequest
             'search' => 'sometimes|string|nullable|max:100',
             'start_price' => 'sometimes|numeric|nullable|min:0|max:end_price',
             'end_price' => 'sometimes|numeric|nullable|min:' . ($this->start_price ?? '0'),
-            'category' => 'sometimes|string|nullable|exists:categories,id',
+            'category' => 'sometimes|numeric|nullable|exists:categories,id',
         ];
     }
 }

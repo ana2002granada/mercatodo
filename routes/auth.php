@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\PaymentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\DashboardController;
@@ -77,3 +78,23 @@ Route::get('/categories/{category}', [CategoriesControllerGuest::class, 'show'])
 Route::get('/products/{product}', [ProductsControllerGuest::class, 'show'])
     ->middleware(['enabled','auth','verified'])
     ->name('guest.products.show');
+
+Route::get('payment/process/{payment}', [PaymentController::class, 'continuousWithPayment'])
+    ->middleware(['enabled','auth', 'verified'])
+    ->name('payment.show');
+
+Route::patch('payment/{payment}/process', [PaymentController::class, 'update'])
+    ->middleware(['enabled','auth', 'verified'])
+    ->name('payment.process');
+
+Route::get('my-payments', [PaymentController::class, 'indexForUser'])
+    ->middleware(['enabled','auth','verified'])
+    ->name('my-payments');
+
+Route::get('my-payments/{payment}', [PaymentController::class, 'show'])
+    ->middleware(['enabled','auth','verified'])
+    ->name('my-payments.payment');
+
+Route::middleware(['enabled','auth','verified'])->get('/payment/reload/{payment}', [PaymentController::class, 'reload'])
+    ->middleware(['enabled','auth','verified'])
+    ->name('payment.reload');

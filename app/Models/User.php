@@ -5,14 +5,12 @@ namespace App\Models;
 use App\Models\Traits\HasUserRoutes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-/**
- * @property bool is_admin
- */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
@@ -51,5 +49,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function image(): string
     {
         return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullname()) ;
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }

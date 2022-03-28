@@ -14,9 +14,9 @@ class ProductsChanged
 
     public string $action;
     public Product $product;
-    public User $user;
+    public ?User $user;
 
-    public function __construct(string $action, Product $product, User $user)
+    public function __construct(string $action, Product $product, ?User $user)
     {
         $this->action = $action;
         $this->product = $product;
