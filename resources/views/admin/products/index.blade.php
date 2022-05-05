@@ -1,11 +1,23 @@
 <x-app-layout>
     <div class=" flex items-center justify-between pb-2">
         <h1 class="text-gray-700 font-semibold text-2xl font-medium">{{trans('categories.products')}}</h1>
-        @can('create', \App\Models\Product::class)
-        <a href="{{\App\Models\Product::createRoute()}}"  class="flex self-center gap-2 font-semibold rounded-2xl px-4 py-1 shadow-md bg-green-500 hover:bg-green-400 ">
-            <em class="fas fa-plus-circle self-center"></em> {{trans('users.actions.create')}}
-        </a>
-        @endcan
+        <div class="flex gap-2">
+            @can('create', \App\Models\Product::class)
+            <a href="{{\App\Models\Product::createRoute()}}"  class="flex self-center gap-2 font-semibold rounded-2xl px-4 py-1 shadow-md bg-green-500 hover:bg-green-400 ">
+                <em class="fas fa-plus-circle self-center"></em> {{trans('users.actions.create')}}
+            </a>
+            @endcan
+            @can('import', \App\Models\Product::class)
+            <a href="{{ App\Models\Import::indexRoute()  }}"  class="flex self-center gap-2 font-semibold rounded-2xl px-4 py-1 shadow-md bg-gray-300 hover:bg-gray-400 ">
+                <em class="fas fa-file-import self-center"></em> {{trans('products.import.imports')}}
+            </a>
+            @endcan
+            @can('export', \App\Models\Product::class)
+            <a href="{{ route('admin.products.export.form') }}"  class="flex self-center gap-2 font-semibold rounded-2xl px-4 py-1 shadow-md bg-gray-300 hover:bg-gray-400 ">
+                <em class="fas fa-file-export self-center"></em> {{trans('products.export.export')}}
+            </a>
+            @endcan
+        </div>
     </div>
     <div>
         <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">

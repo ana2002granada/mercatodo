@@ -35,6 +35,7 @@ class Permissions
     public const PAYMENT_INDEX = 'payment_index';
     public const PAYMENT_SHOW = 'payment_show';
     public const PRODUCT_EXPORT = 'product_export';
+    public const PRODUCT_IMPORT = 'product_import';
 
     public static function getAll(): array
     {
