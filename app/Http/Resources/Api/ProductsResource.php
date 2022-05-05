@@ -12,7 +12,7 @@ class ProductsResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => asset($this->image_route),
             'stock' => $this->stock,
             'price' => $this->price,
             'category_id' => $this->category_id,
