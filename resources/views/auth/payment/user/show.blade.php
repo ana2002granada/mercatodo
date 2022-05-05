@@ -31,33 +31,35 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full bg-primary-500 ">
-                <table class="w-full h-full text-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('products.image') }}</th>
-                            <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('register.name') }}</th>
-                            <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('payments.invoice.price') }}</th>
-                            <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('payments.count') }}</th>
-                            <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('payments.total') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($payment->products as $product)
+            <div class="w-full">
+                <div class="ml-2 h-5/6 overflow-y-scroll">
+                    <table class="w-full text-sm">
+                        <thead>
                             <tr>
-                                <td class="whitespace-nowrap text-gray-600 truncate">
-                                    <img src="{{ $product->image_route }}" alt="{{ $product->name }}" class="rounded-md h-20 w-20 object-center object-cover md:block hidden">
-                                </td>
-                                <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate">{{ $product->name }}</td>
-                                <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate"> {{ $product->amount }} </td>
-                                <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate"> {{ $product->pivot->count }} </td>
-                                <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate"> {{$product->pivot->amount_format }} </td>
+                                <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('products.image') }}</th>
+                                <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('register.name') }}</th>
+                                <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('payments.invoice.price') }}</th>
+                                <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('payments.count') }}</th>
+                                <th scope="col" class="px-9 py-4 text-center font-semibold text-gray-400">{{ trans('payments.total') }}</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="p-9 h-32 bg-red-700">
-                    <div class="flex w-full bg-green-900 justify-between">
+                        </thead>
+                        <tbody>
+                            @foreach($payment->products as $product)
+                                <tr>
+                                    <td class="whitespace-nowrap text-gray-600 truncate">
+                                        <img src="{{ $product->image_route }}" alt="{{ $product->name }}" class="rounded-md h-20 w-20 object-center object-cover md:block hidden">
+                                    </td>
+                                    <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate">{{ $product->name }}</td>
+                                    <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate"> {{ $product->amount }} </td>
+                                    <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate"> {{ $product->pivot->count }} </td>
+                                    <td class="px-9 py-4 border-b text-sm text-center whitespace-nowrap text-gray-600 truncate"> {{$product->pivot->amount_format }} </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="border-2 p-8 ">
+                    <div class="flex w-full justify-between">
                         <p class="font-bold text-black text-lg">{{ trans('payments.invoice.total_amount') }}</p>
                         <p class="font-bold text-black text-lg"> {{ $payment->amount_format }} </p>
                     </div>

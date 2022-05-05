@@ -47,8 +47,8 @@
                         <table class="bg-white min-w-full leading-normal">
                             <thead>
                             <tr class="bg-gray-200 border-b-2 border-gray-300 text-left text-xs text-gray-600 uppercase ">
-                                <th scope="col" class="text-center px-5 py-3">user doc</th>
                                 <th scope="col" class="text-center px-5 py-3">{{ trans('users.info.status') }}</th>
+                                <th scope="col" class="text-center px-5 py-3">Amount</th>
                                 <th scope="col" class="text-center px-5 py-3">{{ trans('users.info.created_at') }}</th>
                                 <th scope="col" class="text-center px-5 py-3"></th>
                             </tr>
@@ -56,13 +56,6 @@
                             <tbody>
                             @foreach($payments as $payment)
                                 <tr class="hover:bg-gray-200">
-                                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
-                                        <div class="flex items-center justify-center">
-                                             <span class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                <span class="relative"> {{ $payment->payer_document }} </span>
-                                            </span>
-                                        </div>
-                                    </td>
                                     <td class="px-5 py-5 border-b border-gray-200 text-sm flex justify-center">
                                     <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         @if($payment->status === \App\Constants\PaymentStatus::SUCCESSFUL)
@@ -81,6 +74,13 @@
                                         <div class="flex items-center justify-center">
                                              <span class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                 <span class="relative"> {{ $payment->created_at }} </span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                                        <div class="flex items-center justify-center">
+                                             <span class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                                <span class="relative"> {{ $payment->amount_format }} </span>
                                             </span>
                                         </div>
                                     </td>
