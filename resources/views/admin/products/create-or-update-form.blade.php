@@ -32,9 +32,9 @@
     @endif
     <div class="grid grid-cols-2 gap-6 gap-y-8 h-full">
         <div>
-            <x-label for="category" :value="trans('categories.category')" />
+            <x-label for="category_id" :value="trans('categories.category')" />
 
-            <v-select name="category"  label="name" :initial="{{ json_encode(['name' => optional($product->category)->name, 'id' => $product->category_id]) }}" :options='@json($categories, true)'/>
+            <v-select name="category_id"  label="name" :initial="{{ json_encode(['name' => optional($product->category)->name, 'id' => $product->category_id]) }}" :options='@json($categories, true)'/>
             @error('category')
                 <span class="text-red-600">
                     <em class="mr-2 fas fa-info-circle"></em>{{ $message }}

@@ -32,7 +32,7 @@ class UpdateProductsTest extends testCase
 
         $data = array_merge(Product::factory()->make()->toArray(), [
             'name' => $this->faker->name,
-            'category' => (string)$product->category_id,
+            'category_id' => (string)$product->category_id,
             'price' => '10000.10',
             'image' => UploadedFile::fake()->create('prueba.png', '512', 'png'),
         ]);
@@ -67,7 +67,7 @@ class UpdateProductsTest extends testCase
 
         $data = array_merge(Product::factory()->make()->toArray(), [
             'name' => $this->faker->name,
-            'category' => (string)$product->category_id,
+            'category_id' => (string)$product->category_id,
             'price' => '10000.10',
             'image' => UploadedFile::fake()->create('prueba.png', '512', 'png'),
         ]);

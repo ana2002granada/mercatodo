@@ -22,6 +22,16 @@
                     {{ trans('categories.products') }}
                 </x-nav-link>
             @endcan
+            @can('reports', App\Models\Report::class)
+                <x-nav-link :href="App\Models\Report::showRoute()" :active="request()->routeIs('admin.reports')">
+                    {{ trans('reports.reports') }}
+                </x-nav-link>
+            @endcan
+            @can('viewAny', \App\Models\Payment::class)
+                <x-nav-link :href="App\Models\Payment::indexRoute()" :active="request()->routeIs('admin.payments')">
+                    Payments
+                </x-nav-link>
+            @endcan
             <x-nav-link>
                 <v-cart />
             </x-nav-link>

@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Helpers\MoneyHelper;
-use App\Models\Traits\HasPaymentRoutes;
-use App\Models\Traits\HasPaymentStatus;
+use App\Models\Traits\Payments\HasPaymentRoutes;
+use App\Models\Traits\Payments\HasPaymentStatus;
+use App\Models\Traits\Payments\ReportPayments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,9 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Payment extends Model
 {
     use HasPaymentStatus;
-
     use HasFactory;
     use HasPaymentRoutes;
+    use ReportPayments;
+
     protected $fillable = [
         'reference',
         'receipt',

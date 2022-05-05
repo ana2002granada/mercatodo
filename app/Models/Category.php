@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Http\Requests\Admin\FormCategoryRequest;
-use App\Models\Traits\HasCategoryRoutes;
+use App\Models\Traits\Categories\HasCategoryRoutes;
 use App\Models\Traits\HasName;
 use App\Models\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Collection;
