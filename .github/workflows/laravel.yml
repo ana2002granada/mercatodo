@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: '5.7'
+          mysql database: 'mercatodo'
+          mysql root password: 'password'
+        
       - name: Git checkout
         uses: actions/checkout@v2
 
@@ -23,7 +29,6 @@ jobs:
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
-
 
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -48,12 +53,5 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      - name: Create Database
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
         run: composer run-script testdox
