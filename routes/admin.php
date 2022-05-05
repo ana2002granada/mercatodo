@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\Exports\ExportProductsController;
+use App\Http\Controllers\Admin\Imports\ImportProductsController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,12 @@ Route::get('export/products/form', [ExportProductsController::class, 'exportProd
 
 Route::post('export/products/', [ExportProductsController::class, 'export'])
     ->name('products.export');
+
+Route::get('import/products', [ImportProductsController::class, 'index'])
+    ->name('products.import.index');
+
+Route::get('import/products/form', [ImportProductsController::class, 'importProductForm'])
+    ->name('products.import.form');
+
+Route::post('import/products/', [ImportProductsController::class, 'import'])
+    ->name('products.import');

@@ -43,4 +43,9 @@ class ProductPolicy
     {
         return $user->can(Permissions::PRODUCT_EXPORT);
     }
+
+    public function import(User $user): bool
+    {
+        return $user->can(Permissions::PRODUCT_IMPORT);
+    }
 }
