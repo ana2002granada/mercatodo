@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\Exports\ExportProductsController;
 use App\Http\Controllers\Admin\Imports\ImportProductsController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Auth\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
@@ -40,3 +42,9 @@ Route::get('import/products/form', [ImportProductsController::class, 'importProd
 
 Route::post('import/products/', [ImportProductsController::class, 'import'])
     ->name('products.import');
+
+Route::get('reports', [ReportsController::class, 'report'])
+    ->name('reports');
+
+Route::get('payments', [PaymentController::class, 'index'])
+    ->name('payments.index');

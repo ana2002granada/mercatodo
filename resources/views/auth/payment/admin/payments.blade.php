@@ -1,47 +1,15 @@
 <x-app-layout>
-    <div class="bg-gray-100 grid grid-cols-1 lg:grid-cols-2 gap-6 -mt-2 mx-12 w-2xl container px-2 mx-auto">
-        <aside class="">
-            <div class="bg-white shadow rounded-lg p-10">
-                <div class="flex flex-col gap-1 text-center items-center">
-                    <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ $user->image() }}" alt="{{ $user->fullname() }}">
-                    <p class="font-semibold">{{$user->fullname()}}</p>
-                    <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
-                        <em class="far fa-at"></em>
-                        {{ $user->email }}
-                    </div>
-                </div>
-                <div class="flex justify-center items-center gap-2 my-3">
-                    <div class="font-semibold text-center mx-4">
-                        <p class="text-black">{{ $payments->count() }}</p>
-                        <span class="text-gray-400">Payments</span>
-                    </div>
-                    <div class="font-semibold text-center mx-4">
-                        <p class="text-black">102</p>
-                        <span class="text-gray-400">Role</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <article class="">
-            <form action="{{ route('home') }}" method="GET" class="bg-white shadow rounded-lg mb-6 p-4">
 
-                <div class="gap-4 flex justify-between">
-                    <div class="gap-4 flex flex-row">
-                        <h3 class="w-1/2"> Status </h3>
-                        <v-select
-                            name="status"
-                            label="name"
-                            :options='@json([
-                                        trans('payments.status.'.\App\Constants\PaymentStatus::PENDING),
-                                        trans('payments.status.'.\App\Constants\PaymentStatus::SUCCESSFUL),
-                                        trans('payments.status.'.\App\Constants\PaymentStatus::REJECTED) ])'/>
-                    </div>
-                    <button type="submit" class="bg-gray-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-                        {{ trans('dashboard.search') }}
-                    </button>
-                </div>
-            </form>
-            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 overflow-x-auto">
+    <div class=" flex items-center justify-between pb-2">
+        <h1 class="text-gray-700 font-semibold text-2xl font-medium">Payments</h1>
+    </div>
+    <div class="flex grid grid grid-cols-2 w-full justify-between gap-2">
+        <div class="w-full">
+            <div class="bg-white rounded-2xl mx-10 py-7 shadow-md">
+                <v-line-chart :information='@json($paymentsCharts)'/>
+            </div>
+        </div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 overflow-x-auto">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                     @if($payments)
                         <table class="bg-white min-w-full leading-normal">
@@ -120,6 +88,6 @@
                     @endif
                 </div>
         </div>
-        </article>
     </div>
+
 </x-app-layout>

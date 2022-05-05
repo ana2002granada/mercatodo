@@ -10,6 +10,9 @@ import Carousel from "./components/Carousel";
 import vSelect from "./components/VSelect";
 import SearchBar from "./components/SearchBar";
 import Cart from "./components/Cart";
+import ProductsAdminView from "./vue/admin/ProductsAdminView";
+import Charts from "./components/Charts";
+import LineChart from "./components/LineChart";
 
 window.Alpine = Alpine;
 
@@ -26,6 +29,10 @@ Vue.component("carousel", Carousel);
 Vue.component("v-select", vSelect);
 Vue.component("v-search-bar", SearchBar);
 Vue.component("v-cart", Cart);
+Vue.component("v-products", ProductsAdminView)
+Vue.component("v-charts", Charts);
+Vue.component('v-line-chart', LineChart
+);
 new Vue({
     el: "#app",
     name: "App",
