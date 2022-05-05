@@ -3,11 +3,8 @@
 namespace Tests\Admin\Products;
 
 use App\Constants\Permissions;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
-use Faker\Provider\File;
-use Faker\Provider\Image;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
