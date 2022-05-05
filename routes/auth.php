@@ -76,7 +76,7 @@ Route::get('/categories/{category}', [CategoriesControllerGuest::class, 'show'])
     ->name('guest.categories.show');
 
 Route::get('/products/{product}', [ProductsControllerGuest::class, 'show'])
-    ->middleware(['enabled','auth','verified'])
+    ->middleware(['enabled','auth','verified', 'productIsEnabled'])
     ->name('guest.products.show');
 
 Route::get('payment/process/{payment}', [PaymentController::class, 'continuousWithPayment'])
