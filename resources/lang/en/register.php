@@ -12,5 +12,5 @@ return [
     'reset' => 'Reset password',
     'verification_title' => 'Thank you for registering! Before we get started, could you verify your email address by clicking the link we just sent you? If you did not receive the email, we will be happy to send you another.',
      'verification_description' => 'A new verification link has been sent to the email address you provided during registration.',
-     'resend' => 'Resend mail'
+     'resend' => 'Resend mail',
 ];

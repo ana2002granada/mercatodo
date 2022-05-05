@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\CategoriesChanged;
 use App\Events\UploadFile;
 use Illuminate\Support\Facades\Log;
 

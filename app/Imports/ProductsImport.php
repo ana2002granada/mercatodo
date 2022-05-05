@@ -2,16 +2,12 @@
 
 namespace App\Imports;
 
-use App\Actions\Products\ImportAction;
 use App\Actions\Products\RegisterImportAction;
 use App\Actions\Products\StoreOrUpdateProductAction;
 use App\Models\Import;
 use App\Models\Product;
 use App\Rules\ImportProductRule;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -19,7 +15,6 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Events\ImportFailed;
-use Maatwebsite\Excel\Jobs\ReadChunk;
 use Maatwebsite\Excel\Validators\ValidationException;
 
 class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUpserts, WithEvents, ShouldQueue, WithChunkReading
@@ -50,7 +45,6 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
         $this->registerImport->storeOrUpdate('successful', $this->import);
     }
 
-
     public function rules(): array
     {
         return ImportProductRule::rules();
@@ -78,7 +72,7 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
                     }
                 }
                 $this->registerImport->storeOrUpdate('Validation error', $this->import, $errors ?? [trans('validation.import.general')]);
-            }
+            },
         ];
     }
 

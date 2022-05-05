@@ -15,11 +15,10 @@ class AddAdditionalFieldsInUsersTable extends Migration
         });
     }
 
-
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['last_name', 'phone_number','disabled_at']);
+            $table->dropColumn(['last_name', 'phone_number', 'disabled_at']);
         });
     }
 }

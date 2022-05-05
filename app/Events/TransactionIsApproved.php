@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Category;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Foundation\Events\Dispatchable;

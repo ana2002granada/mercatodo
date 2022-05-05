@@ -15,7 +15,7 @@ return [
          'import' => 'Import',
          'products' => 'Import Products',
          'file' => 'Load File',
-         'select_file' => 'Select a file'
+         'select_file' => 'Select a file',
      ],
 
      'export' => [
@@ -24,5 +24,5 @@ return [
          'start_stock' => 'Start Stock',
          'end_stock' => 'Ending quantity',
          'all_categories' => 'All',
-     ]
+     ],
 ];

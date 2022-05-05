@@ -22,7 +22,6 @@ trait HasPaymentStatus
         return $this->status === PaymentStatus::PROCESSING;
     }
 
-
     public function isUnprocessed(): bool
     {
         return $this->isPending() || $this->isProcessing();

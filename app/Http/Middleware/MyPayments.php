@@ -23,7 +23,6 @@ class MyPayments
             return redirect()->route('my-payments');
         }
 
-
         return $next($request);
     }
 }

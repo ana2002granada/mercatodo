@@ -28,11 +28,11 @@ class UserPolicy
 
     public function delete(User $user, Model $model): bool
     {
-        return $user->can(Permissions::USERS_DELETE)  && $user->getKey() !== $model->getKey();
+        return $user->can(Permissions::USERS_DELETE) && $user->getKey() !== $model->getKey();
     }
 
     public function toggle(User $user, Model $model): bool
     {
-        return $user->can(Permissions::USERS_TOGGLE)  && $user->getKey() !== $model->getKey();
+        return $user->can(Permissions::USERS_TOGGLE) && $user->getKey() !== $model->getKey();
     }
 }

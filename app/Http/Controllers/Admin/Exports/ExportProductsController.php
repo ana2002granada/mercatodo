@@ -25,7 +25,7 @@ class ExportProductsController extends Controller
         $user = auth()->user();
         $filePath = asset('storage/products.xlsx');
         (new ProductsExport($request))->store('products.xlsx', 'public')->chain([
-            new NotifyUserCompletedExportJob($user, $filePath)
+            new NotifyUserCompletedExportJob($user, $filePath),
         ]);
 
         return redirect(Product::indexRoute())->with('success', 'La expotación a comenzado, te enviaremos un email cuando tu archivo esté listo');

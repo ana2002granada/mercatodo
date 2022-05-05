@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
-Route::resource('users', UsersController::class)->except(['create','store']);
+Route::resource('users', UsersController::class)->except(['create', 'store']);
 
 Route::resource('categories', CategoriesController::class);
 

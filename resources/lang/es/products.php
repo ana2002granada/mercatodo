@@ -15,7 +15,7 @@ return [
         'import' => 'Importar',
         'products' => 'Importar Productos',
         'file' => 'Cargar Archivo',
-        'select_file' => 'Selecciona un archivo'
+        'select_file' => 'Selecciona un archivo',
     ],
 
     'export' => [
@@ -24,5 +24,5 @@ return [
         'start_stock' => 'Cantidad inicial',
         'end_stock' => 'Cantidad final',
         'all_categories' => 'Todas',
-    ]
+    ],
 ];

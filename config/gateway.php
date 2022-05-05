@@ -8,8 +8,8 @@ return [
             'settings' => [
                 'login' => env('PTP_LOGIN'),
                 'tranKey' => env('PTP_TRANKEY'),
-                'baseUrl' => env('PTP_URL')
-            ]
+                'baseUrl' => env('PTP_URL'),
+            ],
         ],
-    ]
+    ],
 ];

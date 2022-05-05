@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Admin\Users;
+namespace Tests\Feature\Admin\Users;
 
 use App\Constants\Permissions;
 use App\Models\User;

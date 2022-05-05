@@ -11,7 +11,7 @@ class CreatePaymentProductTable extends Migration
         Schema::create('payment_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('count');
-            $table-> unsignedInteger('amount');
+            $table->unsignedInteger('amount');
             $table->foreignId('payment_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

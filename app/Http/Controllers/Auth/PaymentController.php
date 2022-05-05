@@ -42,7 +42,7 @@ class PaymentController extends Controller
         $payment = PaymentRequestStoreAction::execute($request, $payment);
 
         return response()->json([
-            'payment' => $payment
+            'payment' => $payment,
         ]);
     }
 
@@ -99,7 +99,7 @@ class PaymentController extends Controller
             $newPayment = CloneProductsAction::execute($payment, $newPayment);
 
             return view('auth.payment.index', [
-                'payment' => $newPayment
+                'payment' => $newPayment,
             ]);
         }
         return response()->redirectTo($payment->myPaymentRoute())->with('error', 'En este momento tienes una transaccion en proceso c:');
