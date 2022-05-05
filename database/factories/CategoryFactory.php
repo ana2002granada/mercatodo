@@ -11,7 +11,7 @@ class CategoryFactory extends Factory
         return [
             'uuid' => $this->faker->uuid(),
             'name' => $this->faker->name(),
-            'image' => $this->faker->imageUrl(),
+            'image' => 'products/ec8e99bb-6229-4030-8218-46a17486a947_5nUMMrmVM9WwN2ESZSyUppuhxhLSug8P1mVXVsfk.jpg',
         ];
     }
 }
