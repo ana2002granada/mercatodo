@@ -47,7 +47,7 @@ class UsersController extends Controller
         $this->authorize('delete', $user);
         $user->delete();
 
-        return response()->redirectToRoute('admin.users.index')
+        return response()->redirectTo($user->indexRoute())
             ->with('success', trans('users.actions.success'));
     }
 
@@ -56,7 +56,7 @@ class UsersController extends Controller
         $this->authorize('toggle', $user);
         $user->disabled_at = $user->disabled_at ? null : now();
         $user->save();
-        return response()->redirectToRoute('admin.users.index')
+        return response()->redirectTo($user->indexRoute())
             ->with('success', trans('users.actions.success'));
     }
 }

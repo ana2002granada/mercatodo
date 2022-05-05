@@ -3,6 +3,7 @@
 namespace App\Constants;
 
 use App\Traits\CategoryPermissions;
+use App\Traits\PaymentPermissions;
 use App\Traits\ProductPermissions;
 use App\Traits\UserPermissions;
 
@@ -11,6 +12,7 @@ class Permissions
     use UserPermissions;
     use ProductPermissions;
     use CategoryPermissions;
+    use PaymentPermissions;
 
     public const USERS_INDEX = 'users_index';
     public const USERS_SHOW = 'users_show';
@@ -30,6 +32,8 @@ class Permissions
     public const PRODUCTS_DELETE = 'products_delete';
     public const PRODUCTS_TOGGLE = 'categories_toggle';
     public const LOGS_VIEW = 'logs_view';
+    public const PAYMENT_INDEX = 'payment_index';
+    public const PAYMENT_SHOW = 'payment_show';
 
     public static function getAll(): array
     {
@@ -38,6 +42,7 @@ class Permissions
             static::getUserPermissions(),
             static::getProductsPermissions(),
             static::getCategoriesPermissions(),
+            static::getPaymentPermissions(),
         );
     }
 }

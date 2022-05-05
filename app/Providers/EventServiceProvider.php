@@ -4,10 +4,13 @@ namespace App\Providers;
 
 use App\Events\CategoriesChanged;
 use App\Events\ProductsChanged;
+use App\Events\TransactionIsApproved;
+use App\Listeners\DecreaseStock;
 use App\Listeners\RefreshCategoryCache;
 use App\Listeners\RegisterCategoryLog;
 use App\Listeners\RegisterProductLog;
 use App\Models\Category;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Observers\CategoryObserver;
 use App\Observers\ProductObserver;
@@ -27,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProductsChanged::class => [
             RegisterProductLog::class,
+        ],
+        TransactionIsApproved::class => [
+            DecreaseStock::class,
         ]
 
     ];

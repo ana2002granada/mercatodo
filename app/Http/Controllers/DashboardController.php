@@ -12,11 +12,13 @@ class DashboardController extends Controller
     public function index(IndexDashboardRequest $request): View
     {
         $products = Product::active()
+            ->withStock()
             ->priceFilter($request->get('start_price'), $request->get('end_price'))
             ->categoryFilter($request->get('category'))
             ->search($request->get('search'))
             ->orderBy('name')
-            ->paginate(2);
+            ->paginate(8)
+            ->withQueryString();
 
         $categories = Category::active()->nameField($request->get('search'))->orderBy('name')->get();
         return view('dashboard', compact('products', 'categories'));
