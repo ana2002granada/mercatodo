@@ -2,6 +2,8 @@
 
 namespace App\Exports;
 
+use App\Exports\Sheets\CategoriesSheet;
+use App\Exports\Sheets\ProductsSheet;
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
@@ -10,15 +12,15 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProductsExport implements FromCollection, WithHeadings, ShouldQueue
+class ProductsExport implements ShouldQueue, WithMultipleSheets
 {
     use Exportable;
 
-    private ?string $start_price;
-    private ?string $end_price;
-    private ?string $start_stock;
-    private ?string $end_stock;
-    private ?string $category_id;
+    protected ?string $start_price;
+    protected ?string $end_price;
+    protected ?string $start_stock;
+    protected ?string $end_stock;
+    protected ?string $category_id;
 
     public function __construct(Request $request)
     {
@@ -29,26 +31,14 @@ class ProductsExport implements FromCollection, WithHeadings, ShouldQueue
         $this->category_id = $request->category_id;
     }
 
-    public function headings(): array
+    public function sheets(): array
     {
-        return [
-            'Id',
-            'Name',
-            'Description',
-            'Category_id',
-            'Price',
-            'Stock',
-        ];
-    }
-
-    public function collection(): Collection
-    {
-        return Product::query()
-            ->priceFilter($this->start_price, $this->end_price)
-            ->stockFilter($this->start_stock, $this->end_stock)
-            ->categoryFilter($this->category_id)->with('category:id,name')
-            ->select('id', 'name', 'description', 'category_id', 'price', 'stock')
-            ->get()
-            ->makeHidden(['image_route', 'amount']);
+        return [new ProductsSheet(
+            $this->start_price,
+            $this->end_price,
+            $this->start_stock,
+            $this->end_stock,
+            $this->category_id
+        ), new CategoriesSheet()];
     }
 }
