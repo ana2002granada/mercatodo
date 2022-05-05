@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\Exports\ExportProductsController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,9 @@ Route::post('products/toggle/{product}', [ProductsController::class, 'toggle'])
 
 Route::get('logs', [LogViewerController::class, 'index'])
     ->middleware(['permission:' . \App\Constants\Permissions::LOGS_VIEW]);
+
+Route::get('export/products/form', [ExportProductsController::class, 'exportProductForm'])
+    ->name('products.export.form');
+
+Route::post('export/products/', [ExportProductsController::class, 'export'])
+    ->name('products.export');

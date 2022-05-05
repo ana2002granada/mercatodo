@@ -34,6 +34,7 @@ class Permissions
     public const LOGS_VIEW = 'logs_view';
     public const PAYMENT_INDEX = 'payment_index';
     public const PAYMENT_SHOW = 'payment_show';
+    public const PRODUCT_EXPORT = 'product_export';
 
     public static function getAll(): array
     {
