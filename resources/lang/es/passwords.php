@@ -10,5 +10,7 @@ return [
     'password' => 'Contraseña',
     'remember' => '¿Olvidaste tu contraseña? No hay problema. Simplemente háganos saber su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña que le permitirá elegir una nueva.',
     'link' => 'Enlace de restablecimiento de contraseña de correo electrónico',
-
+    'authenticated' => 'Usuario autenticado exitosamente',
+    'authenticated_error' => 'Error al autenticar. Verifica tus credenciales',
+    'logout' => 'La sesión se cerró satisfactoriamente'
 ];
