@@ -12,5 +12,5 @@ return [
     'link' => 'Enlace de restablecimiento de contraseña de correo electrónico',
     'authenticated' => 'Usuario autenticado exitosamente',
     'authenticated_error' => 'Error al autenticar. Verifica tus credenciales',
-    'logout' => 'La sesión se cerró satisfactoriamente'
+    'logout' => 'La sesión se cerró satisfactoriamente',
 ];

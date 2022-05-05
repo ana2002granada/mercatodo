@@ -30,7 +30,7 @@ class Category extends Model
     protected $appends = [
         'show_route',
         'image_route',
-        'products_count'
+        'products_count',
     ];
 
     public function products(): HasMany
