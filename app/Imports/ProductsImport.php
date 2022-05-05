@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Events\ImportFailed;
@@ -32,17 +33,18 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
 
     public function model(array $row): void
     {
+        $product = $row['id'] ? Product::find($row['id']) : null;
         $this->storeProductAction->execute(
             [
                 'name' => $row['name'],
                 'description' => $row['description'],
-                'category' => $row['category_id'],
+                'category_id' => $row['category_id'],
                 'price' => $row['price'],
                 'stock' => $row['stock'],
-                ],
-            $row['id'] ? Product::find($row['id']) : null
+            ],
+            $product
         );
-        $this->registerImport->storeOrUpdate('successful', $this->import);
+
     }
 
     public function rules(): array
@@ -58,12 +60,9 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
     public function registerEvents(): array
     {
         $errors = [];
-
         return [
             ImportFailed::class => function (ImportFailed $event) {
-                dd($event->getException());
                 if ($event->getException() instanceof ValidationException) {
-                    dd('ahoooooo');
                     /** @var ValidationException $exception */
                     $exception = $event->getException();
                     $failures = $exception->failures();
