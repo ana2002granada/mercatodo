@@ -4,14 +4,11 @@ namespace App\Exports;
 
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class ProductsExport implements FromCollection, WithHeadings, ShouldQueue
 {
@@ -52,6 +49,6 @@ class ProductsExport implements FromCollection, WithHeadings, ShouldQueue
             ->categoryFilter($this->category_id)->with('category:id,name')
             ->select('id', 'name', 'description', 'category_id', 'price', 'stock')
             ->get()
-            ->makeHidden(['image_route','amount']);
+            ->makeHidden(['image_route', 'amount']);
     }
 }

@@ -5,8 +5,8 @@ namespace App\Constants;
 use App\Traits\CategoryPermissions;
 use App\Traits\PaymentPermissions;
 use App\Traits\ProductPermissions;
-use App\Traits\UserPermissions;
 use App\Traits\ReportPermissions;
+use App\Traits\UserPermissions;
 
 class Permissions
 {

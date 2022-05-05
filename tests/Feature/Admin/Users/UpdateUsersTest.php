@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Admin\Users;
+namespace Tests\Feature\Admin\Users;
 
 use App\Constants\Permissions;
 use App\Models\User;
@@ -22,7 +22,7 @@ class UpdateUsersTest extends testCase
         $user = User::factory()->create();
 
         $data = array_merge($user->toArray(), [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $response = $this->actingAs($userAdmin)->patch(route('admin.users.update', $user), $data);
@@ -39,7 +39,7 @@ class UpdateUsersTest extends testCase
 
         $data = array_merge($user->toArray(), [
             'name' => 'Aname',
-            'disabled_at' => false
+            'disabled_at' => false,
         ]);
 
         $response = $this->actingAs($user)->patch(route('admin.users.update', $user), $data);

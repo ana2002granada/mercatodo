@@ -5,14 +5,12 @@ namespace App\Models;
 use App\Actions\Products\StoreOrUpdateProductAction;
 use App\Helpers\MoneyHelper;
 use App\Http\Requests\Admin\FormProductRequest;
-use App\Models\Traits\Products\HasProductRoutes;
 use App\Models\Traits\HasStatus;
+use App\Models\Traits\Products\HasProductRoutes;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -110,7 +108,7 @@ class Product extends Model
         });
     }
 
-    public static function storeOrUpdateProduct(FormProductRequest $request, StoreOrUpdateProductAction $action, ?Product $product = null): Product
+    public static function storeOrUpdateProduct(FormProductRequest $request, StoreOrUpdateProductAction $action, ?self $product = null): self
     {
         return $action->execute([
             'category_id' => $request->category_id,

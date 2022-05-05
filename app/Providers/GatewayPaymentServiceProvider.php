@@ -12,7 +12,7 @@ class GatewayPaymentServiceProvider extends ServiceProvider
     {
         $this->app->bind(GatewayPaymentContract::class, function ($app) {
             $current = config('gateway.services.current');
-            $gateway = config('gateway.services.'.$current);
+            $gateway = config('gateway.services.' . $current);
             $gatewayClass = Arr::get($gateway, 'class');
 
             return new $gatewayClass(Arr::get($gateway, 'settings'));

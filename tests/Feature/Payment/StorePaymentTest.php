@@ -1,17 +1,13 @@
 <?php
 
-namespace Tests\Admin\Products;
+namespace Tests\Feature\Payment;
 
-use App\Constants\Permissions;
-use App\Models\Category;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\UploadedFile;
 use Laravel\Passport\Passport;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class StorePaymentTest extends testCase
@@ -24,16 +20,15 @@ class StorePaymentTest extends testCase
         $product = Product::factory()->create();
         $items =
             [
-                "cart-items" =>
-                    [
+                'cart-items' => [
                         [
-                            "id" => $product->id,
-                            "name" => $product->name,
-                            "count" => 5,
-                            "stock" => $product->stock,
-                            "price" => $product->price,
-                        ]
-                    ]
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'count' => 5,
+                            'stock' => $product->stock,
+                            'price' => $product->price,
+                        ],
+                    ],
             ];
 
         Passport::actingAs(
@@ -56,16 +51,15 @@ class StorePaymentTest extends testCase
         $product = Product::factory()->create();
         $items =
             [
-                "cart-items" =>
-                    [
+                'cart-items' => [
                         [
-                            "id" => $product->id,
-                            "name" => $product->name,
-                            "count" => 5,
-                            "stock" => $product->stock,
-                            "price" => $product->price,
-                        ]
-                    ]
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'count' => 5,
+                            'stock' => $product->stock,
+                            'price' => $product->price,
+                        ],
+                    ],
             ];
 
         $response = $this->postJson(route('api.payment.process'), $items);
@@ -80,16 +74,15 @@ class StorePaymentTest extends testCase
         $product = Product::factory()->create();
         $items =
             [
-                "cart-items" =>
-                    [
+                'cart-items' => [
                         [
-                            "id" => $product->id,
-                            "name" => $product->name,
-                            "count" => $product->stock + 1,
-                            "stock" => $product->stock,
-                            "price" => $product->price,
-                        ]
-                    ]
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'count' => $product->stock + 1,
+                            'stock' => $product->stock,
+                            'price' => $product->price,
+                        ],
+                    ],
             ];
         $response = $this->postJson(route('api.payment.process'), $items);
         $response->assertUnprocessable('error');

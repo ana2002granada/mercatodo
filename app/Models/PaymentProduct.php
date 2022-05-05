@@ -21,8 +21,8 @@ class PaymentProduct extends Pivot
 
     ];
 
-    protected $appends =[
-      'amount_format'
+    protected $appends = [
+      'amount_format',
     ];
 
     public function getAmountFormatAttribute(): string

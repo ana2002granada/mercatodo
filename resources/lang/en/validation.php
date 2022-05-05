@@ -4,7 +4,7 @@ return [
 
     'import' => [
         'validation' => 'An error has occurred in the validation of the import data',
-        'general' => 'Import error'
+        'general' => 'Import error',
     ],
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',

@@ -116,6 +116,6 @@ return [
         'name' => env('ADMIN_NAME'),
         'last_name' => env('ADMIN_LAST_NAME'),
         'email' => env('ADMIN_EMAIL'),
-        'password' => env('ADMIN_PASSWORD')
-    ]
+        'password' => env('ADMIN_PASSWORD'),
+    ],
 ];

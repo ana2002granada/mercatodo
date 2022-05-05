@@ -13,7 +13,7 @@ class StoreOrUpdateProductAction
     {
         if (!$product) {
             $product = new Product();
-            $product->uuid = (string) Str::uuid();
+            $product->uuid = (string)Str::uuid();
         }
 
         $product->name = Arr::get($data, 'name');

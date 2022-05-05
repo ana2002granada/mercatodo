@@ -29,7 +29,6 @@ class Category extends Model
 
     protected $appends = ['show_route', 'image_route', 'products_count'];
 
-
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
@@ -45,17 +44,16 @@ class Category extends Model
         return '/storage/' . $this->image;
     }
 
-
     public function getProductsCountAttribute(): string
     {
         return $this->products()->count();
     }
 
-    public static function storeOrUpdateCategory(FormCategoryRequest $request, ?Category $category = null): Category
+    public static function storeOrUpdateCategory(FormCategoryRequest $request, ?self $category = null): self
     {
         if (!$category) {
-            $category = new Category();
-            $category->uuid = (string) Str::uuid();
+            $category = new self();
+            $category->uuid = (string)Str::uuid();
         }
 
         $category->name = $request->name;

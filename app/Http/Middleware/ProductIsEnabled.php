@@ -2,13 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Product;
 use Closure;
 use Illuminate\Http\Request;
 
 /**
- * Class ProductIsEnabled
- * @package App\Http\Middleware
+ * Class ProductIsEnabled.
  */
 class ProductIsEnabled
 {

@@ -12,7 +12,7 @@ return [
      'status' => [
          'completed' => 'Completed',
          'pending' => 'Pending',
-         'rejected' => 'Rejected'
+         'rejected' => 'Rejected',
      ],
      'invoice' => [
          'invoice' => 'Invoice',

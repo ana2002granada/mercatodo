@@ -1,15 +1,12 @@
 <?php
 
-namespace Tests\Admin\Categories;
+namespace Tests\Feature\Admin\Categories;
 
 use App\Constants\Permissions;
 use App\Models\Category;
 use App\Models\User;
-use Faker\Provider\File;
-use Faker\Provider\Image;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\UploadedFile;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 

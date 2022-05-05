@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\transactionIsApproved;
 use App\Exceptions\StockException;
-use Illuminate\Support\Facades\Cache;
-use function PHPUnit\Framework\throwException;
 
 class DecreaseStock
 {

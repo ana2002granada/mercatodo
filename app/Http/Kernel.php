@@ -51,6 +51,6 @@ class Kernel extends HttpKernel
         'enabled' => IsEnabled::class,
         'productIsEnabled' => ProductIsEnabled::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
-        'my.payment' => MyPayments::class
+        'my.payment' => MyPayments::class,
     ];
 }

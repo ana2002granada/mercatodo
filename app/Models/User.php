@@ -48,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function image(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullname()) ;
+        return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullname());
     }
 
     public function payments(): HasMany

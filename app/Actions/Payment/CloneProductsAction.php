@@ -4,8 +4,6 @@ namespace App\Actions\Payment;
 
 use App\Models\Payment;
 use App\Models\PaymentProduct;
-use App\Models\Product;
-use Illuminate\Support\Arr;
 
 class CloneProductsAction
 {
@@ -14,7 +12,7 @@ class CloneProductsAction
         $payment->products()->detach();
         foreach ($oldPayment->products as $item) {
             $productItem = new PaymentProduct();
-            $productItem->count =  $item->pivot->count;
+            $productItem->count = $item->pivot->count;
             $productItem->amount = $item->pivot->amount;
             $productItem->payment_id = $payment->id;
             $productItem->product_id = $item->id;

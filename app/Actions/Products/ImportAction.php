@@ -17,7 +17,7 @@ class ImportAction
             Excel::import(new ProductsImport($import, $registerImport), $file);
             $response = [
                 'type' => 'successful',
-                'message' => 'upload successful'
+                'message' => 'upload successful',
             ];
             UploadFile::dispatch($response['message'], auth()->user());
 
@@ -25,7 +25,7 @@ class ImportAction
         } catch (\Throwable $exception) {
             $response = [
                 'type' => 'error',
-                'message' => 'Import filed'
+                'message' => 'Import filed',
             ];
             if (!$import->errors) {
                 $registerImport->storeOrUpdate('general error', $import, ['prueba error general']);

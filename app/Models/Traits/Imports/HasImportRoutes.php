@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Traits\Imports ;
+namespace App\Models\Traits\Imports;
 
 trait HasImportRoutes
 {

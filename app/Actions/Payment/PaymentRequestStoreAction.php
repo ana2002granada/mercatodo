@@ -2,13 +2,11 @@
 
 namespace App\Actions\Payment;
 
-use App\Constants\PaymentStatus;
 use App\Http\Requests\Auth\StorePaymentRequest;
 use App\Models\Payment;
 use App\Models\PaymentProduct;
 use App\Models\Product;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 class PaymentRequestStoreAction
 {
@@ -19,7 +17,7 @@ class PaymentRequestStoreAction
         foreach ($request->get('cart-items') as $item) {
             $product = Product::find(Arr::get($item, 'id'));
             $productItem = new PaymentProduct();
-            $productItem->count =  Arr::get($item, 'count');
+            $productItem->count = Arr::get($item, 'count');
             $productItem->amount = $productItem->count * $product->price;
             $productItem->payment_id = $payment->id;
             $productItem->product_id = $product->id;

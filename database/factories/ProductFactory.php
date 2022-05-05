@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -20,8 +19,6 @@ class ProductFactory extends Factory
             'description' => $this->faker->text(100),
         ];
     }
-
-
 
     public function unverified(): UserFactory
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Admin\Categories;
+namespace Tests\Feature\Admin\Categories;
 
 use App\Constants\Permissions;
 use App\Models\Category;

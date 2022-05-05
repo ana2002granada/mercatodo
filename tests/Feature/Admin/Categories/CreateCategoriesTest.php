@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Admin\Categories;
+namespace Tests\Feature\Admin\Categories;
 
 use App\Constants\Permissions;
-use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
