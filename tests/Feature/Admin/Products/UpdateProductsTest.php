@@ -37,7 +37,7 @@ class UpdateProductsTest extends testCase
         $response = $this->patch(route('admin.products.update', $product), $data);
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('Products', ['name' => $data['name']]);
+        $this->assertDatabaseHas('products', ['name' => $data['name']]);
     }
 
     public function testAnUserWithPermissionsCannotUpdateAProductWithInvalidData(): void
