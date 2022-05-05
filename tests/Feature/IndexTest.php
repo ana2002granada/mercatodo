@@ -7,7 +7,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
-class indexTest extends TestCase
+class IndexTest extends TestCase
 {
     /**
      * A basic feature test example.

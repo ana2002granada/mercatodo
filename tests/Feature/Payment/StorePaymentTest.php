@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin\Products;
+namespace Tests\Feature\Payment;
 
 use App\Models\Payment;
 use App\Models\Product;
