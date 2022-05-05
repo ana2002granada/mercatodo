@@ -18,7 +18,6 @@
                                 <th scope="col" class="text-center px-5 py-3">user doc</th>
                                 <th scope="col" class="text-center px-5 py-3">{{ trans('users.info.status') }}</th>
                                 <th scope="col" class="text-center px-5 py-3">{{ trans('users.info.created_at') }}</th>
-                                <th scope="col" class="text-center px-5 py-3"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,30 +49,6 @@
                                              <span class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                 <span class="relative"> {{ $payment->created_at }} </span>
                                             </span>
-                                        </div>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
-                                        <div class="flex sm:items-center sm:ml-6 justify-end pr-2">
-                                            <x-dropdown align="right" width="48">
-                                                <x-slot name="trigger">
-                                                    <button class="flex items-center text-sm font-medium text-gray-800 hover:text-gray-400 hover:border-gray-300 focus:outline-none focus:text-gray-600 focus:border-gray-300 transition duration-150 ease-in-out">
-                                                        <em class="fas fa-ellipsis-v"></em>
-                                                    </button>
-                                                </x-slot>
-
-                                                <x-slot name="content">
-                                                    @can('view', $payment)
-                                                        <x-dropdown-link href="{{ route('my-payments.payment', $payment) }}">
-                                                            {{ $payment->isProcessing() ? trans('payments.continuousShopping') : trans('users.actions.more') }}
-                                                        </x-dropdown-link>
-                                                        @if($payment->isPending())
-                                                            <x-dropdown-link :href="$payment->process_url">
-                                                                {{ trans('payments.continue_payment') }}
-                                                            </x-dropdown-link>
-                                                        @endif
-                                                    @endcan
-                                                </x-slot>
-                                            </x-dropdown>
                                         </div>
                                     </td>
                                 </tr>

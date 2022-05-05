@@ -15,7 +15,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->name(),
             'price' => 2000.86,
             'stock' => 20,
-            'image' => $this->faker->imageUrl(),
+            'image' => 'products/ec8e99bb-6229-4030-8218-46a17486a947_5nUMMrmVM9WwN2ESZSyUppuhxhLSug8P1mVXVsfk.jpg',
             'description' => $this->faker->text(100),
         ];
     }
