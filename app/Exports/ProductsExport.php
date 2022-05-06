@@ -7,6 +7,7 @@ use App\Exports\Sheets\ProductsSheet;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class ProductsExport implements ShouldQueue, WithMultipleSheets
 {
