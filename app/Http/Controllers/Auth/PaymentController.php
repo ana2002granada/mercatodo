@@ -21,7 +21,6 @@ use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-
     public function show(Payment $payment, GatewayPaymentContract $gateway): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
     {
         if ($payment->isProcessing()) {

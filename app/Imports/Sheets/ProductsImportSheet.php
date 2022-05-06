@@ -7,20 +7,14 @@ use App\Actions\Products\StoreOrUpdateProductAction;
 use App\Models\Import;
 use App\Models\Product;
 use App\Rules\ImportProductRule;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
-use Maatwebsite\Excel\Events\AfterImport;
-use Maatwebsite\Excel\Events\ImportFailed;
-use Maatwebsite\Excel\Validators\ValidationException;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class ProductsImportSheet implements ToModel, WithHeadingRow, WithValidation, WithUpserts
+class ProductsImportSheet implements ToModel, WithHeadingRow, WithValidation, WithUpserts, WithEvents
 {
     protected StoreOrUpdateProductAction $storeProductAction;
     protected RegisterImportAction $registerImport;
@@ -35,7 +29,6 @@ class ProductsImportSheet implements ToModel, WithHeadingRow, WithValidation, Wi
 
     public function model(array $row): void
     {
-
         $product = $row['id'] ? Product::find($row['id']) : null;
         $this->storeProductAction->execute(
             [
@@ -59,4 +52,12 @@ class ProductsImportSheet implements ToModel, WithHeadingRow, WithValidation, Wi
         return 'name';
     }
 
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $this->registerImport->storeOrUpdate('successful', $this->import);
+            },
+            ];
+    }
 }

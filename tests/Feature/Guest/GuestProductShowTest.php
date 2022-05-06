@@ -2,12 +2,9 @@
 
 namespace Tests\Feature\Guest;
 
-use App\Constants\Permissions;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class GuestProductShowTest extends testCase
@@ -26,5 +23,4 @@ class GuestProductShowTest extends testCase
         $response->assertViewIs('guest.products.show');
         $response->assertSessionHasNoErrors();
     }
-
 }

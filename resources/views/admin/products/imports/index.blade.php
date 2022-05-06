@@ -61,7 +61,7 @@
                                     </button>
                                     @if($import->errors)
                                         <modal name-modal="error-{{$import->id}}" inline-template v-cloak>
-    <div v-if="showModal">
+            <div v-if="showModal">
         <transition  enter-class="transition ease-out duration-200"
                      enter-active-class="transform opacity-0 scale-95"
                      enter-to-class="transform opacity-100 scale-100"

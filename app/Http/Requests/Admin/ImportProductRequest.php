@@ -14,7 +14,7 @@ class ImportProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'products' => 'required|mimes:xlsx'
+            'products' => 'required|mimes:xlsx',
         ];
     }
 }

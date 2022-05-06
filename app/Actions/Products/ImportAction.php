@@ -15,7 +15,6 @@ class ImportAction
         /** @var Import $import */
         $import = $registerImport->storeOrUpdate('processing');
         try {
-
             Excel::import(new ProductsImport($import, $registerImport), $file);
             $response = [
                 'type' => 'successful',
@@ -23,7 +22,6 @@ class ImportAction
             ];
 
             UploadFile::dispatch($response['message'], auth()->user());
-
         } catch (\Throwable $exception) {
             $response = [
                 'type' => 'error',

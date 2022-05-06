@@ -8,9 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ImportProductRequest;
 use App\Models\Import;
 use App\Models\Product;
-use App\Rules\ImportProductRule;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ImportProductsController extends Controller

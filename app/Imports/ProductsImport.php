@@ -11,7 +11,6 @@ use Maatwebsite\Excel\Concerns\SkipsUnknownSheets;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\ImportFailed;
 use Maatwebsite\Excel\Validators\ValidationException;
 
@@ -44,11 +43,6 @@ class ProductsImport implements WithMultipleSheets, SkipsUnknownSheets, ShouldQu
     {
         $errors = [];
         return [
-            AfterSheet::class => [
-                self::class,
-                function () {
-                    $this->registerImport->storeOrUpdate('successful', $this->import);
-                }],
             ImportFailed::class => function (ImportFailed $event) {
                 if ($event->getException() instanceof ValidationException) {
                     /** @var ValidationException $exception */

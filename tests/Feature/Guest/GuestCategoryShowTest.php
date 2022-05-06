@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Guest;
 
-use App\Constants\Permissions;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class GuestCategoryShowTest extends testCase
@@ -25,5 +23,4 @@ class GuestCategoryShowTest extends testCase
         $response->assertViewIs('guest.categories.show');
         $response->assertSessionHasNoErrors();
     }
-
 }
