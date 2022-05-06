@@ -2,14 +2,12 @@
 
 namespace Tests\Feature\Api\Products;
 
-use App\Constants\Permissions;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Laravel\Passport\Passport;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class UpdateProductsTest extends testCase

@@ -12,7 +12,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductsApiController extends Controller
 {
-
     public function index(): AnonymousResourceCollection
     {
         return ProductsResource::collection(Product::paginate());
@@ -42,5 +41,4 @@ class ProductsApiController extends Controller
         $product->delete();
         return response()->json(['status' => '201', 'message' => 'se ha eliminado correctamente el show que has elegido']);
     }
-
 }

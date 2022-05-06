@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Laravel\Passport\TokenRepository;
 
@@ -44,7 +43,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'OK',
-            'message' => trans('passwords.logout')
+            'message' => trans('passwords.logout'),
         ]);
     }
 }

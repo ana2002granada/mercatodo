@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Products\ProductsApiController;
 use App\Http\Controllers\Auth\PaymentController;
@@ -29,6 +28,3 @@ Route::middleware('auth:api')->group(function () {
 
 Route::middleware('auth:api')->post('/payment/process', [PaymentController::class, 'store'])
     ->name('payment.process');
-
-
-

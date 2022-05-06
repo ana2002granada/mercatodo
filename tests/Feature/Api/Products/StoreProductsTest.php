@@ -62,5 +62,4 @@ class StoreProductsTest extends testCase
         $response = $this->postJson(route('api.products.store'), $data);
         $response->assertUnauthorized();
     }
-
 }

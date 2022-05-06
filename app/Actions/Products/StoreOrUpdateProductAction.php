@@ -11,7 +11,6 @@ class StoreOrUpdateProductAction
 {
     public function execute(array $data, ?Product $product = null): Product
     {
-
         if (!$product) {
             $product = new Product();
             $product->uuid = (string)Str::uuid();

@@ -8,7 +8,6 @@ class RegisterImportAction
 {
     public function storeOrUpdate(string $status, ?Import $import = null, ?array $errors = []): Import
     {
-
         if (!$import) {
             $import = new Import();
             $import->user_id = auth()->user()->id;

@@ -4,13 +4,9 @@ namespace App\Exports;
 
 use App\Exports\Sheets\CategoriesSheet;
 use App\Exports\Sheets\ProductsSheet;
-use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ProductsExport implements ShouldQueue, WithMultipleSheets
 {

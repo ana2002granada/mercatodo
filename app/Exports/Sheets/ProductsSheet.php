@@ -3,7 +3,6 @@
 namespace App\Exports\Sheets;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -11,7 +10,6 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 
 class ProductsSheet implements FromCollection, WithHeadings, WithTitle
 {
-
     private ?string $start_price;
     private ?string $end_price;
     private ?string $start_stock;
@@ -47,12 +45,11 @@ class ProductsSheet implements FromCollection, WithHeadings, WithTitle
             ->categoryFilter($this->category_id)->with('category:id,name')
             ->select('id', 'name', 'description', 'category_id', 'price', 'stock')
             ->get()
-            ->makeHidden(['image_route','amount']);
+            ->makeHidden(['image_route', 'amount']);
     }
 
     public function title(): string
     {
         return 'Products';
     }
-
 }
