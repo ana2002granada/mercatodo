@@ -16,6 +16,7 @@ jobs:
       - uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '5.7'
+          coverage: xdebug
           mysql database: 'mercatodo'
           mysql root password: 'password'
 
@@ -58,3 +59,14 @@ jobs:
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: composer run-script testdox
+
+      - name: Prepare paths for SonarQube analysis
+        run: |
+          sed -i "s|$GITHUB_WORKSPACE|/github/workspace|g" phpunit.report.xml
+          sed -i "s|$GITHUB_WORKSPACE|/github/workspace|g" phpunit.coverage.xml
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
