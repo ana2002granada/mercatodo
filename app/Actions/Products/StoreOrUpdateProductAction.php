@@ -15,7 +15,6 @@ class StoreOrUpdateProductAction
             $product = new Product();
             $product->uuid = (string)Str::uuid();
         }
-
         $product->name = Arr::get($data, 'name');
         $product->description = Arr::get($data, 'description');
         $product->stock = Arr::get($data, 'stock');
