@@ -28,7 +28,7 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::middleware('auth:api')->post('/payment/process', [PaymentController::class, 'store'])
-    ->name('api.payment.process');
+    ->name('payment.process');
 
 
 
