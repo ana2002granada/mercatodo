@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class RegisterProductLog
 {
-    public function handle(ProductsChanged $event)
+    public function handle(ProductsChanged $event): void
     {
         Log::info('Product ' . $event->action, [
             'id' => $event->product->id,

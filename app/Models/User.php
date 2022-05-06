@@ -41,14 +41,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->is_admin;
     }
 
-    public function fullname(): string
+    public function fullName(): string
     {
         return strtolower($this->name . ' ' . $this->last_name);
     }
 
     public function image(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullname());
+        return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullName());
     }
 
     public function payments(): HasMany

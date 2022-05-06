@@ -11,17 +11,19 @@ class ImportAction
 {
     public function execute(RegisterImportAction $registerImport, $file): array
     {
+
         /** @var Import $import */
         $import = $registerImport->storeOrUpdate('processing');
         try {
+
             Excel::import(new ProductsImport($import, $registerImport), $file);
             $response = [
                 'type' => 'successful',
                 'message' => 'upload successful',
             ];
+
             UploadFile::dispatch($response['message'], auth()->user());
 
-            $registerImport->storeOrUpdate('successful', $import);
         } catch (\Throwable $exception) {
             $response = [
                 'type' => 'error',

@@ -6,19 +6,16 @@ use App\Actions\Products\RegisterImportAction;
 use App\Actions\Products\StoreOrUpdateProductAction;
 use App\Imports\Sheets\ProductsImportSheet;
 use App\Models\Import;
-use App\Models\Product;
-use App\Rules\ImportProductRule;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\SkipsUnknownSheets;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\ImportFailed;
 use Maatwebsite\Excel\Validators\ValidationException;
 
-class ProductsImport implements ShouldQueue, WithChunkReading, WithMultipleSheets, SkipsUnknownSheets
+class ProductsImport implements WithMultipleSheets, SkipsUnknownSheets, ShouldQueue, WithChunkReading, WithEvents
 {
     protected Import $import;
     protected RegisterImportAction $registerImport;
@@ -31,10 +28,27 @@ class ProductsImport implements ShouldQueue, WithChunkReading, WithMultipleSheet
         $this->storeProductAction = resolve(StoreOrUpdateProductAction::class);
     }
 
+    public function sheets(): array
+    {
+        return [
+            'Products' => new ProductsImportSheet($this->registerImport, $this->import),
+        ];
+    }
+
+    public function onUnknownSheet($sheetName): void
+    {
+        info("Sheet {$sheetName} was skipped");
+    }
+
     public function registerEvents(): array
     {
         $errors = [];
         return [
+            AfterSheet::class => [
+                self::class,
+                function () {
+                    $this->registerImport->storeOrUpdate('successful', $this->import);
+                }],
             ImportFailed::class => function (ImportFailed $event) {
                 if ($event->getException() instanceof ValidationException) {
                     /** @var ValidationException $exception */
@@ -47,18 +61,6 @@ class ProductsImport implements ShouldQueue, WithChunkReading, WithMultipleSheet
                 $this->registerImport->storeOrUpdate('Validation error', $this->import, $errors ?? [trans('validation.import.general')]);
             },
         ];
-    }
-
-    public function sheets(): array
-    {
-        return [
-            'Products' => new ProductsImportSheet(),
-        ];
-    }
-
-    public function onUnknownSheet($sheetName)
-    {
-        info("Sheet {$sheetName} was skipped");
     }
 
     public function chunkSize(): int

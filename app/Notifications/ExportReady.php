@@ -10,34 +10,18 @@ class ExportReady extends Notification
 {
     use Queueable;
     public $filePath;
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
+
     public function __construct($filePath)
     {
         $this->filePath = $filePath;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
                     ->line('Link para descargar el archivo')
@@ -45,13 +29,7 @@ class ExportReady extends Notification
                     ->line('Gracias por usar nuestra Aplicacion!');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
+    public function toArray($notifiable): array
     {
         return [
             //

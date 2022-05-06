@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IsEnabled
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         if (optional(auth()->user())->disabled_at) {
             Auth::guard('web')->logout();

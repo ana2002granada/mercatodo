@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\ExportProductRequest;
 use App\Jobs\NotifyUserCompletedExportJob;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ExportProductsController extends Controller
@@ -20,8 +21,9 @@ class ExportProductsController extends Controller
         return view('admin.products.exports.export-product-form', compact('categories'));
     }
 
-    public function export(ExportProductRequest $request)
+    public function export(ExportProductRequest $request): RedirectResponse
     {
+        $this->authorize('export', Product::class);
         $user = auth()->user();
         $filePath = asset('storage/products.xlsx');
         (new ProductsExport($request))->store('products.xlsx', 'public')->chain([

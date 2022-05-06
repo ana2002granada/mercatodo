@@ -23,24 +23,6 @@
             </div>
         </aside>
         <article class="">
-            <form action="{{ route('home') }}" method="GET" class="bg-white shadow rounded-lg mb-6 p-4">
-
-                <div class="gap-4 flex justify-between">
-                    <div class="gap-4 flex flex-row">
-                        <h3 class="w-1/2"> Status </h3>
-                        <v-select
-                            name="status"
-                            label="name"
-                            :options='@json([
-                                        trans('payments.status.'.\App\Constants\PaymentStatus::PENDING),
-                                        trans('payments.status.'.\App\Constants\PaymentStatus::SUCCESSFUL),
-                                        trans('payments.status.'.\App\Constants\PaymentStatus::REJECTED) ])'/>
-                    </div>
-                    <button type="submit" class="bg-gray-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-                        {{ trans('dashboard.search') }}
-                    </button>
-                </div>
-            </form>
             <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 overflow-x-auto">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                     @if($payments)

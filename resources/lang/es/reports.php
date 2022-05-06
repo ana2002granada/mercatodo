@@ -3,7 +3,9 @@
 return [
 
     'reports' => 'Reportes',
-    'productChart' => 'Gráfica de productos',
-    'paymentChart' => 'Gráfica de transacciones',
+    'productChart' => 'Productos más vendidos',
+    'paymentChart' => 'Estado de transacciones',
+    'last_week' => 'de la última semana',
+    'transactions' => 'Trancciones',
 
 ];

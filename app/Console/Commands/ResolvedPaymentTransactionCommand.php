@@ -13,7 +13,7 @@ class ResolvedPaymentTransactionCommand extends Command
 
     protected $description = 'This resolves pending payments';
 
-    public function handle()
+    public function handle(): void
     {
         $payments = Payment::whereIn('status', [PaymentStatus::PENDING, PaymentStatus::PROCESSING])
             ->get();

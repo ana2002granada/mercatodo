@@ -56,19 +56,52 @@
 									</span>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 text-sm">
-                                    <button @click="$root.$emit('open-modal')">
+                                    <button @click="$root.$emit('open-modal-error-{{$import->id}}')">
                                         {{ trans('users.actions.delete') }}
                                     </button>
                                     @if($import->errors)
-                                        @foreach( $import->errors as $error)
-                                            <x-import-modal></x-import-modal>
-                                            @if(is_array($error))
-                                                {{ $error = implode(' ' , $error) }}
+                                        <modal name-modal="error-{{$import->id}}" inline-template v-cloak>
+    <div v-if="showModal">
+        <transition  enter-class="transition ease-out duration-200"
+                     enter-active-class="transform opacity-0 scale-95"
+                     enter-to-class="transform opacity-100 scale-100"
+                     leave-class="transition ease-in duration-75"
+                     leave-active-class="transform opacity-100 scale-100"
+                     leave-to-class="transform opacity-0 scale-95"
+                     name="modal" >
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
 
-                                            @else
-                                                <x-import-modal errors="{{ $error }}" />
-                                            @endif
-                                        @endforeach
+                            <div class="text-center p-5 flex-auto justify-center">
+                                <div class="flex gap-3 mb-5">
+                                    <em class="fas fa-exclamation-circle self-center text-red-600 fa-3x"></em>
+                                    <h2 class="text-xl font-bold py-4 ">{{trans('validation.import.errors')}}</h2>
+                                </div>
+                                <div class="mockup-code text-left">
+                                    @foreach($import->errors as $row => $error)
+                                        @if(!is_array($error))
+                                        <pre class="w-full" data-prefix="~"><code>{{ $error }}</code></pre>
+                                        @else
+                                            @foreach($error as $value)
+                                                <pre class="w-full" data-prefix="~"><code><span class="text-danger">{{ $row }}: </span>{{ $value }}</code></pre>
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!--footer-->
+                            <div class="p-3  mt-2 text-center space-x-4 md:block">
+                                <button class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100" @click="showModal=false">
+                                    Close
+                                </button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+</modal>
                                     @endif
                                 </td>
                             </tr>

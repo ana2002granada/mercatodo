@@ -30,7 +30,7 @@
                             <p class="lowercase text-sm text-gray-400 group-hover:text-gray-600 pt-1 tracking-wider">
                                 {{ trans('products.import.select_file') }}</p>
                         </div>
-                        <input type="file" accept=".xlsx" name="products" class="hidden">
+                        <input type="file" accept=".xlsx" name="products" >
                     </label>
                 </div>
             </div>

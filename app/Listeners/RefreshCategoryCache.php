@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class RefreshCategoryCache
 {
-    public function handle(CategoriesChanged $event)
+    public function handle(CategoriesChanged $event): void
     {
         Cache::tags(['categories'])->flush();
     }

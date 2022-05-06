@@ -7,7 +7,7 @@ use App\Exceptions\StockException;
 
 class DecreaseStock
 {
-    public function handle(TransactionIsApproved $event)
+    public function handle(TransactionIsApproved $event): void
     {
         foreach ($event->payment->products as $product) {
             if ($product->pivot->count <= $product->stock) {
