@@ -60,20 +60,6 @@ class PaymentController extends Controller
 
     public function index(): View
     {
-        $this->authorize('viewAny', Payment::class);
-        $payments = Payment::whereRaw('payer_document is not null')->orderBy('created_at', 'DESC')->paginate(4);
-        $paymentsCharts = Payment::orderBy('created_at', 'ASC')
-            ->select(DB::raw('count(*) as total'), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as date"), 'status')
-            ->whereIn('status', [PaymentStatus::SUCCESSFUL, PaymentStatus::REJECTED, PaymentStatus::PENDING])
-            ->whereBetween('created_at', [now()->subDays(6)->startOfDay(), now()->subDays(1)->endOfDay()])
-            ->groupBy(['status', 'created_at'])
-            ->get()
-            ->groupBy('status');
-        return view('auth.payment.admin.payments', compact('payments', 'paymentsCharts'));
-    }
-
-    public function indexForUser(): View
-    {
         $payments = auth()->user()->payments()->orderBy('created_at', 'DESC')->paginate(4);
         $user = auth()->user();
         return view('auth.payment.user.my-payments', compact('payments', 'user'));

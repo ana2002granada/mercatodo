@@ -4,20 +4,21 @@ namespace App\Imports;
 
 use App\Actions\Products\RegisterImportAction;
 use App\Actions\Products\StoreOrUpdateProductAction;
+use App\Imports\Sheets\ProductsImportSheet;
 use App\Models\Import;
 use App\Models\Product;
 use App\Rules\ImportProductRule;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\SkipsUnknownSheets;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithUpserts;
-use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Events\ImportFailed;
 use Maatwebsite\Excel\Validators\ValidationException;
 
-class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUpserts, WithEvents, ShouldQueue, WithChunkReading
+class ProductsImport implements ShouldQueue, WithChunkReading, WithMultipleSheets, SkipsUnknownSheets
 {
     protected Import $import;
     protected RegisterImportAction $registerImport;
@@ -28,31 +29,6 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
         $this->import = $import;
         $this->registerImport = $registerImport;
         $this->storeProductAction = resolve(StoreOrUpdateProductAction::class);
-    }
-
-    public function model(array $row): void
-    {
-        $product = $row['id'] ? Product::find($row['id']) : null;
-        $this->storeProductAction->execute(
-            [
-                'name' => $row['name'],
-                'description' => $row['description'],
-                'category_id' => $row['category_id'],
-                'price' => $row['price'],
-                'stock' => $row['stock'],
-            ],
-            $product
-        );
-    }
-
-    public function rules(): array
-    {
-        return ImportProductRule::rules();
-    }
-
-    public function uniqueBy()
-    {
-        return 'name';
     }
 
     public function registerEvents(): array
@@ -71,6 +47,18 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
                 $this->registerImport->storeOrUpdate('Validation error', $this->import, $errors ?? [trans('validation.import.general')]);
             },
         ];
+    }
+
+    public function sheets(): array
+    {
+        return [
+            'Products' => new ProductsImportSheet(),
+        ];
+    }
+
+    public function onUnknownSheet($sheetName)
+    {
+        info("Sheet {$sheetName} was skipped");
     }
 
     public function chunkSize(): int
