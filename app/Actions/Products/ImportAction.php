@@ -11,6 +11,7 @@ class ImportAction
 {
     public function execute(RegisterImportAction $registerImport, $file): array
     {
+
         /** @var Import $import */
         $import = $registerImport->storeOrUpdate('processing');
         try {
@@ -19,9 +20,8 @@ class ImportAction
                 'type' => 'successful',
                 'message' => 'upload successful',
             ];
-            UploadFile::dispatch($response['message'], auth()->user());
 
-            $registerImport->storeOrUpdate('successful', $import);
+            UploadFile::dispatch($response['message'], auth()->user());
         } catch (\Throwable $exception) {
             $response = [
                 'type' => 'error',

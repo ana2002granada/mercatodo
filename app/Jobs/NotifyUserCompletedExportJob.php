@@ -25,7 +25,7 @@ class NotifyUserCompletedExportJob implements ShouldQueue
         $this->filePath = $filePath;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $this->user->notify(new ExportReady($this->filePath));
     }

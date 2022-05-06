@@ -17,15 +17,11 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    /**
-     * @return Application|Factory|\Illuminate\Contracts\View\View|RedirectResponse
-     */
-    public function show(Payment $payment, GatewayPaymentContract $gateway)
+    public function show(Payment $payment, GatewayPaymentContract $gateway): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
     {
         if ($payment->isProcessing()) {
             return response()->redirectTo($payment->showRoute());
@@ -46,7 +42,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function update(UpdatePaymentRequest $request, Payment $payment, GatewayPaymentContract $gateway)
+    public function update(UpdatePaymentRequest $request, Payment $payment, GatewayPaymentContract $gateway): Application|RedirectResponse|\Illuminate\Routing\Redirector
     {
         $payment = PaymentUpdateAction::execute($request, $payment);
 
@@ -60,30 +56,12 @@ class PaymentController extends Controller
 
     public function index(): View
     {
-        $this->authorize('viewAny', Payment::class);
-        $payments = Payment::whereRaw('payer_document is not null')->orderBy('created_at', 'DESC')->paginate(4);
-        $paymentsCharts = Payment::orderBy('created_at', 'ASC')
-            ->select(DB::raw('count(*) as total'), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as date"), 'status')
-            ->whereIn('status', [PaymentStatus::SUCCESSFUL, PaymentStatus::REJECTED, PaymentStatus::PENDING])
-            ->whereBetween('created_at', [now()->subDays(6)->startOfDay(), now()->subDays(1)->endOfDay()])
-            ->groupBy(['status', 'created_at'])
-            ->get()
-            ->groupBy('status');
-        return view('auth.payment.admin.payments', compact('payments', 'paymentsCharts'));
-    }
-
-    public function indexForUser(): View
-    {
         $payments = auth()->user()->payments()->orderBy('created_at', 'DESC')->paginate(4);
         $user = auth()->user();
         return view('auth.payment.user.my-payments', compact('payments', 'user'));
     }
 
-    /**
-     * @param Payment $payment
-     * @return View|RedirectResponse
-     */
-    public function continuousWithPayment(Payment $payment)
+    public function continuousWithPayment(Payment $payment): View|RedirectResponse
     {
         if ($payment->isProcessing()) {
             return view('auth.payment.index', compact('payment'));
@@ -91,7 +69,7 @@ class PaymentController extends Controller
         return response()->redirectTo($payment->myPaymentRoute());
     }
 
-    public function reload(Payment $payment)
+    public function reload(Payment $payment): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
     {
         $hasPendingTransaction = auth()->user()->payments()->where('status', PaymentStatus::PROCESSING)->count();
         if ($payment->isRejected() && !$hasPendingTransaction) {

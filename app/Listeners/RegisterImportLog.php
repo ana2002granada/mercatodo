@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class RegisterImportLog
 {
-    public function handle(UploadFile $event)
+    public function handle(UploadFile $event): void
     {
         Log::info('Import ' . $event->message, [
             'user' => $event->user->email,

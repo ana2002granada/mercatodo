@@ -41,7 +41,7 @@ class Product extends Model
         return $this->showGuestRoute();
     }
 
-    public function getImageRouteAttribute()
+    public function getImageRouteAttribute(): string
     {
         return '/storage/' . $this->image;
     }

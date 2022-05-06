@@ -4,20 +4,17 @@ namespace App\Imports;
 
 use App\Actions\Products\RegisterImportAction;
 use App\Actions\Products\StoreOrUpdateProductAction;
+use App\Imports\Sheets\ProductsImportSheet;
 use App\Models\Import;
-use App\Models\Product;
-use App\Rules\ImportProductRule;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\SkipsUnknownSheets;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithUpserts;
-use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Events\ImportFailed;
 use Maatwebsite\Excel\Validators\ValidationException;
 
-class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUpserts, WithEvents, ShouldQueue, WithChunkReading
+class ProductsImport implements WithMultipleSheets, SkipsUnknownSheets, ShouldQueue, WithChunkReading, WithEvents
 {
     protected Import $import;
     protected RegisterImportAction $registerImport;
@@ -30,29 +27,16 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
         $this->storeProductAction = resolve(StoreOrUpdateProductAction::class);
     }
 
-    public function model(array $row): void
+    public function sheets(): array
     {
-        $product = $row['id'] ? Product::find($row['id']) : null;
-        $this->storeProductAction->execute(
-            [
-                'name' => $row['name'],
-                'description' => $row['description'],
-                'category_id' => $row['category_id'],
-                'price' => $row['price'],
-                'stock' => $row['stock'],
-            ],
-            $product
-        );
+        return [
+            'Products' => new ProductsImportSheet($this->registerImport, $this->import),
+        ];
     }
 
-    public function rules(): array
+    public function onUnknownSheet($sheetName): void
     {
-        return ImportProductRule::rules();
-    }
-
-    public function uniqueBy()
-    {
-        return 'name';
+        info("Sheet {$sheetName} was skipped");
     }
 
     public function registerEvents(): array

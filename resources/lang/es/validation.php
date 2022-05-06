@@ -4,6 +4,7 @@ return [
     'import' => [
         'import_validation' => 'Ha ocurrido un error en la validación de los datos del importe',
         'general' => 'Error al importar',
+        'errors' => 'Errores',
     ],
     'accepted' => 'El :attribute debe ser aceptado.',
     'accepted_if' => 'EL :attribute debe ser aceptado cuando :other es :value.',

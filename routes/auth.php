@@ -87,7 +87,7 @@ Route::patch('payment/{payment}/process', [PaymentController::class, 'update'])
     ->middleware(['enabled', 'auth', 'verified'])
     ->name('payment.process');
 
-Route::get('my-payments', [PaymentController::class, 'indexForUser'])
+Route::get('my-payments', [PaymentController::class, 'index'])
     ->middleware(['enabled', 'auth', 'verified'])
     ->name('my-payments');
 

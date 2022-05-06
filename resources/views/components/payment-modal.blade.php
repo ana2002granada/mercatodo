@@ -26,7 +26,7 @@
                                 </div>
                                 <div>
                                     <x-label class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Owner Name</x-label>
-                                    <span class="capitalize">{{ auth()->user()->fullname() }}</span>
+                                    <span class="capitalize">{{ auth()->user()->fullName() }}</span>
                                 </div>
                                 <div>
                                     <x-label class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Owner Name</x-label>
