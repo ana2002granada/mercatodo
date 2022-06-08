@@ -37,7 +37,7 @@
                         <p class="text-2xl leading-normal">{{ trans('payments.total') }}</p>
                         <p class="text-2xl font-bold leading-normal text-right">{{ $payment->amount_format }}</p>
                     </div>
-                    <button class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700" @click="$root.$emit('open-modal', {'route': '{{ route('payment.process', $payment) }}'})">
+                    <button class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700" @click="$root.$emit('open-modal-payment', {'route': '{{ route('payment.process', $payment) }}'})">
                         {{ trans('payments.continuous') }}
                     </button>
                 </div>

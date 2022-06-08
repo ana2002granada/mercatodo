@@ -87,7 +87,7 @@
                                                 @endcan
                                                 @can('delete', $category)
                                                     <x-dropdown-link>
-                                                        <button @if($category->products_count) disabled class="text-gray-400 cursor-default" @endif @click="$root.$emit('open-modal', {'route': '{{ $category->deleteRoute() }}'})">
+                                                        <button @if($category->products_count) disabled class="text-gray-400 cursor-default" @endif @click="$root.$emit('open-modal-delete', {'route': '{{ $category->deleteRoute() }}'})">
                                                             {{ trans('users.actions.delete') }}
                                                         </button>
                                                     </x-dropdown-link>
