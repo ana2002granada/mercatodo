@@ -15,7 +15,7 @@ class ResolvedPaymentTransactionCommand extends Command
 
     public function handle(): void
     {
-        $payments = Payment::whereIn('status', [PaymentStatus::PENDING, PaymentStatus::PROCESSING])
+        $payments = Payment::where('status', PaymentStatus::PENDING)
             ->get();
         foreach ($payments as $payment) {
             $this->info('Processing payment: ' . $payment->id);

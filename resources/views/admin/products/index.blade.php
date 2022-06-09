@@ -97,7 +97,7 @@
                                                 @endcan
                                                 @can('delete', $product)
                                                     <x-dropdown-link>
-                                                        <button @click="$root.$emit('open-modal', {'route': '{{ $product->deleteRoute() }}'})">
+                                                        <button @click="$root.$emit('open-modal-delete', {'route': '{{ $product->deleteRoute() }}'})">
                                                             {{ trans('users.actions.delete') }}
                                                         </button>
                                                     </x-dropdown-link>
