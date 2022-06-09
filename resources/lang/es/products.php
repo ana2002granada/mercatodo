@@ -16,6 +16,7 @@ return [
         'products' => 'Importar Productos',
         'file' => 'Cargar Archivo',
         'select_file' => 'Selecciona un archivo',
+        'details' => 'Detalles',
     ],
 
     'export' => [
