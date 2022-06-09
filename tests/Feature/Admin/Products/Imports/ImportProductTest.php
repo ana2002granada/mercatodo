@@ -23,7 +23,7 @@ class ImportProductTest extends TestCase
         );
 
         $file = new UploadedFile(
-            base_path('tests\Files\productsImport.xlsx'),
+            base_path('tests/Files/productsImport.xlsx'),
             'productsImport.xlsx',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             null,
