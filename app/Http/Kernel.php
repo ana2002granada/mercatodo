@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\IsEnabled;
+use App\Http\Middleware\MyPayments;
+use App\Http\Middleware\ProductIsEnabled;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -47,6 +49,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'enabled' => IsEnabled::class,
+        'productIsEnabled' => ProductIsEnabled::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'my.payment' => MyPayments::class,
     ];
 }

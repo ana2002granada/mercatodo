@@ -21,10 +21,7 @@ use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    /**
-     * @return Application|Factory|\Illuminate\Contracts\View\View|RedirectResponse
-     */
-    public function show(Payment $payment, GatewayPaymentContract $gateway)
+    public function show(Payment $payment, GatewayPaymentContract $gateway): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
     {
         if ($payment->isProcessing()) {
             return response()->redirectTo($payment->showRoute());
@@ -41,11 +38,11 @@ class PaymentController extends Controller
         $payment = PaymentRequestStoreAction::execute($request, $payment);
 
         return response()->json([
-            'payment' => $payment
+            'payment' => $payment,
         ]);
     }
 
-    public function update(UpdatePaymentRequest $request, Payment $payment, GatewayPaymentContract $gateway)
+    public function update(UpdatePaymentRequest $request, Payment $payment, GatewayPaymentContract $gateway): Application|RedirectResponse|\Illuminate\Routing\Redirector
     {
         $payment = PaymentUpdateAction::execute($request, $payment);
 
@@ -57,17 +54,14 @@ class PaymentController extends Controller
         }
     }
 
-    public function indexForUser(): View
+    public function index(): View
     {
-        $payments = auth()->user()->payments()->orderBy('created_at', 'DESC')->paginate(8);
-        return view('auth.payment.user.my-payments', compact('payments'));
+        $payments = auth()->user()->payments()->orderBy('created_at', 'DESC')->paginate(4);
+        $user = auth()->user();
+        return view('auth.payment.user.my-payments', compact('payments', 'user'));
     }
 
-    /**
-     * @param Payment $payment
-     * @return View|RedirectResponse
-     */
-    public function continuousWithPayment(Payment $payment)
+    public function continuousWithPayment(Payment $payment): View|RedirectResponse
     {
         if ($payment->isProcessing()) {
             return view('auth.payment.index', compact('payment'));
@@ -75,7 +69,7 @@ class PaymentController extends Controller
         return response()->redirectTo($payment->myPaymentRoute());
     }
 
-    public function reload(Payment $payment)
+    public function reload(Payment $payment): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
     {
         $hasPendingTransaction = auth()->user()->payments()->where('status', PaymentStatus::PROCESSING)->count();
         if ($payment->isRejected() && !$hasPendingTransaction) {
@@ -83,7 +77,7 @@ class PaymentController extends Controller
             $newPayment = CloneProductsAction::execute($payment, $newPayment);
 
             return view('auth.payment.index', [
-                'payment' => $newPayment
+                'payment' => $newPayment,
             ]);
         }
         return response()->redirectTo($payment->myPaymentRoute())->with('error', 'En este momento tienes una transaccion en proceso c:');

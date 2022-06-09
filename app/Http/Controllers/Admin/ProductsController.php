@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Products\StoreOrUpdateProductAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FormProductRequest;
 use App\Models\Product;
@@ -25,10 +26,10 @@ class ProductsController extends Controller
         return view('admin.products.create', new ProductFormViewModel());
     }
 
-    public function store(FormProductRequest $request): RedirectResponse
+    public function store(FormProductRequest $request, StoreOrUpdateProductAction $action): RedirectResponse
     {
         $this->authorize('create', Product::class);
-        $product = Product::storeOrUpdateProduct($request);
+        $product = Product::storeOrUpdateProduct($request, $action);
 
         return redirect($product->showRoute())
             ->with('success', trans('users.actions.success'));
@@ -46,10 +47,10 @@ class ProductsController extends Controller
         return view('admin.products.edit', new ProductFormViewModel($product));
     }
 
-    public function update(FormProductRequest $request, Product $product): RedirectResponse
+    public function update(FormProductRequest $request, Product $product, StoreOrUpdateProductAction $action): RedirectResponse
     {
         $this->authorize('update', $product);
-        $product = Product::storeOrUpdateProduct($request, $product);
+        $product = Product::storeOrUpdateProduct($request, $action, $product);
 
         return response()->redirectTo($product->showRoute())
             ->with('success', trans('users.actions.success'));

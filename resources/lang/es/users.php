@@ -23,5 +23,5 @@ return [
         'disabled' => 'El usuario se encuentra deshabilitado, comuniquese con el administrador',
         'enable' => 'Habilitar',
         'disable' => 'Deshabilitar',
-    ]
+    ],
 ];

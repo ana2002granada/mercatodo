@@ -8,11 +8,11 @@ use Illuminate\Support\ServiceProvider;
 
 class GatewayPaymentServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->app->bind(GatewayPaymentContract::class, function ($app) {
             $current = config('gateway.services.current');
-            $gateway = config('gateway.services.'.$current);
+            $gateway = config('gateway.services.' . $current);
             $gatewayClass = Arr::get($gateway, 'class');
 
             return new $gatewayClass(Arr::get($gateway, 'settings'));

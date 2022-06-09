@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasUserRoutes;
+use App\Models\Traits\Users\HasUserRoutes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -41,18 +41,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->is_admin;
     }
 
-    public function fullname(): string
+    public function fullName(): string
     {
         return strtolower($this->name . ' ' . $this->last_name);
     }
 
     public function image(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullname()) ;
+        return 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->fullName());
     }
 
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function imports(): HasMany
+    {
+        return $this->hasMany(Import::class);
     }
 }

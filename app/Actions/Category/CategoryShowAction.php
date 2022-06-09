@@ -10,6 +10,6 @@ class CategoryShowAction
     {
         $products = $category->products()->paginate(8);
 
-        return ['category' => $category , 'products' => $products];
+        return ['category' => $category, 'products' => $products];
     }
 }

@@ -23,5 +23,5 @@ return [
         'disabled' => 'The user is disabled, contact the administrator',
         'enable' => 'Enable',
         'disable' => 'Disable',
-    ]
+    ],
 ];

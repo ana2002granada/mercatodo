@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -14,14 +13,12 @@ class ProductFactory extends Factory
             'uuid' => $this->faker->uuid(),
             'category_id' => Category::factory()->create()->id,
             'name' => $this->faker->name(),
-            'price' => 2000.86,
+            'price' => 2000,
             'stock' => 20,
-            'image' => $this->faker->imageUrl(),
+            'image' => 'products/ec8e99bb-6229-4030-8218-46a17486a947_5nUMMrmVM9WwN2ESZSyUppuhxhLSug8P1mVXVsfk.jpg',
             'description' => $this->faker->text(100),
         ];
     }
-
-
 
     public function unverified(): UserFactory
     {

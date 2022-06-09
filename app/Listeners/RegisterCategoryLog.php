@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class RegisterCategoryLog
 {
-    public function handle(CategoriesChanged $event)
+    public function handle(CategoriesChanged $event): void
     {
         Log::info('Category ' . $event->action, [
             'id' => $event->category->id,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Admin\Products;
+namespace Tests\Feature\Admin\Products;
 
 use App\Constants\Permissions;
 use App\Models\Category;
@@ -30,12 +30,13 @@ class StoreProductsTest extends testCase
 
         $data = array_merge(Product::factory()->make()->toArray(), [
             'name' => $this->faker->name,
-            'category' => (string)$category,
+            'category_id' => (string)$category,
             'price' => '10000.10',
             'image' => UploadedFile::fake()->create('prueba.png', '512', 'png'),
         ]);
 
         $response = $this->post(route('admin.products.store'), $data);
+        $response->assertRedirect();
         $this->assertDatabaseHas('products', ['name' => $data['name']]);
         $response->assertSessionHasNoErrors();
     }
@@ -68,7 +69,7 @@ class StoreProductsTest extends testCase
 
         $data = array_merge(Product::factory()->make()->toArray(), [
             'name' => $this->faker->name,
-            'category' => (string)$category,
+            'category_id' => (string)$category,
             'price' => '10000.10',
             'image' => UploadedFile::fake()->create('prueba.png', '512', 'png'),
         ]);

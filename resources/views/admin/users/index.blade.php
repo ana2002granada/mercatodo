@@ -73,7 +73,7 @@
                                             @endcan
                                             @can('delete', $user)
                                                 <x-dropdown-link>
-                                                    <button @click="$root.$emit('open-modal', {'route': '{{$user->deleteRoute()}}'})">
+                                                    <button @click="$root.$emit('open-modal-delete', {'route': '{{$user->deleteRoute()}}'})">
                                                         {{ trans('users.actions.delete') }}
                                                     </button>
                                                 </x-dropdown-link>

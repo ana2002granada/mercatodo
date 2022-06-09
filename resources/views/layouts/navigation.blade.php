@@ -5,7 +5,7 @@
                 {{ trans('dashboard.home') }}
             </x-nav-link>
             <x-nav-link :href="App\Models\Payment::myPaymentsRoute()" :active="request()->routeIs('my-payments.*')">
-                My Payment
+                {{ trans('payments.myPayments') }}
             </x-nav-link>
             @can('viewAny', App\Models\User::class)
                 <x-nav-link :href="App\Models\User::indexRoute()" :active="request()->routeIs('admin.users.*')">
@@ -18,8 +18,13 @@
                 </x-nav-link>
             @endcan
             @can('viewAny', App\Models\Product::class)
-                <x-nav-link :href="App\Models\Product::indexRoute()" :active="request()->routeIs('admin.products.*')">
+                <x-nav-link :href="App\Models\Product::indexRoute()" :active="request()->routeIs(['admin.products.*', 'admin.*.products'])" >
                     {{ trans('categories.products') }}
+                </x-nav-link>
+            @endcan
+            @can('reports', App\Models\Report::class)
+                <x-nav-link :href="App\Models\Report::showRoute()" :active="request()->routeIs('admin.reports')">
+                    {{ trans('reports.reports') }}
                 </x-nav-link>
             @endcan
             <x-nav-link>

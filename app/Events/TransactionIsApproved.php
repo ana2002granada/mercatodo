@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Category;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -16,9 +15,8 @@ class TransactionIsApproved
     public Payment $payment;
     public User $user;
 
-    public function __construct(Payment $payment, User $user)
+    public function __construct(Payment $payment)
     {
         $this->payment = $payment;
-        $this->user = $user;
     }
 }

@@ -45,7 +45,7 @@ class AuthenticationTest extends TestCase
     public function testAnUserCanNotEnterIfIsDisabled(): void
     {
         $user = User::factory(['disabled_at'=>now()])->create();
-        $response=$this->post('/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);

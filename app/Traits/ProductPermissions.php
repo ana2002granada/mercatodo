@@ -15,6 +15,8 @@ trait ProductPermissions
             Permissions::PRODUCTS_UPDATE,
             Permissions::PRODUCTS_DELETE,
             Permissions::PRODUCTS_TOGGLE,
+            Permissions::PRODUCT_EXPORT,
+            Permissions::PRODUCT_IMPORT,
         ];
     }
 }

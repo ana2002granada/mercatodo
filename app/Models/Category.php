@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Http\Requests\Admin\FormCategoryRequest;
-use App\Models\Traits\HasCategoryRoutes;
+use App\Models\Traits\Categories\HasCategoryRoutes;
 use App\Models\Traits\HasName;
 use App\Models\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Collection;
@@ -27,8 +27,11 @@ class Category extends Model
         'image',
     ];
 
-    protected $appends = ['show_route', 'image_route', 'products_count'];
-
+    protected $appends = [
+        'show_route',
+        'image_route',
+        'products_count',
+    ];
 
     public function products(): HasMany
     {
@@ -45,17 +48,16 @@ class Category extends Model
         return '/storage/' . $this->image;
     }
 
-
     public function getProductsCountAttribute(): string
     {
         return $this->products()->count();
     }
 
-    public static function storeOrUpdateCategory(FormCategoryRequest $request, ?Category $category = null): Category
+    public static function storeOrUpdateCategory(FormCategoryRequest $request, ?self $category = null): self
     {
         if (!$category) {
-            $category = new Category();
-            $category->uuid = (string) Str::uuid();
+            $category = new self();
+            $category->uuid = (string)Str::uuid();
         }
 
         $category->name = $request->name;

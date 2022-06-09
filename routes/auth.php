@@ -49,7 +49,7 @@ Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke
                 ->middleware('enabled', 'auth');
 
 Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-                ->middleware(['enabled','auth', 'signed', 'throttle:6,1'])
+                ->middleware(['enabled', 'auth', 'signed', 'throttle:6,1'])
                 ->name('verification.verify');
 
 Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
@@ -68,33 +68,33 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['enabled','auth', 'verified'])
+    ->middleware(['enabled', 'auth', 'verified'])
     ->name('home');
 
 Route::get('/categories/{category}', [CategoriesControllerGuest::class, 'show'])
-    ->middleware(['enabled','auth','verified'])
+    ->middleware(['enabled', 'auth', 'verified'])
     ->name('guest.categories.show');
 
 Route::get('/products/{product}', [ProductsControllerGuest::class, 'show'])
-    ->middleware(['enabled','auth','verified'])
+    ->middleware(['enabled', 'auth', 'verified', 'productIsEnabled'])
     ->name('guest.products.show');
 
 Route::get('payment/process/{payment}', [PaymentController::class, 'continuousWithPayment'])
-    ->middleware(['enabled','auth', 'verified'])
+    ->middleware(['enabled', 'auth', 'verified'])
     ->name('payment.show');
 
 Route::patch('payment/{payment}/process', [PaymentController::class, 'update'])
-    ->middleware(['enabled','auth', 'verified'])
+    ->middleware(['enabled', 'auth', 'verified'])
     ->name('payment.process');
 
-Route::get('my-payments', [PaymentController::class, 'indexForUser'])
-    ->middleware(['enabled','auth','verified'])
+Route::get('my-payments', [PaymentController::class, 'index'])
+    ->middleware(['enabled', 'auth', 'verified'])
     ->name('my-payments');
 
 Route::get('my-payments/{payment}', [PaymentController::class, 'show'])
-    ->middleware(['enabled','auth','verified'])
+    ->middleware(['enabled', 'auth', 'verified', 'my.payment'])
     ->name('my-payments.payment');
 
-Route::middleware(['enabled','auth','verified'])->get('/payment/reload/{payment}', [PaymentController::class, 'reload'])
-    ->middleware(['enabled','auth','verified'])
+Route::middleware(['enabled', 'auth', 'verified'])->get('/payment/reload/{payment}', [PaymentController::class, 'reload'])
+    ->middleware(['enabled', 'auth', 'verified'])
     ->name('payment.reload');

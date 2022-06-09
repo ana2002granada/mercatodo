@@ -5,6 +5,7 @@ namespace App\Constants;
 use App\Traits\CategoryPermissions;
 use App\Traits\PaymentPermissions;
 use App\Traits\ProductPermissions;
+use App\Traits\ReportPermissions;
 use App\Traits\UserPermissions;
 
 class Permissions
@@ -13,6 +14,7 @@ class Permissions
     use ProductPermissions;
     use CategoryPermissions;
     use PaymentPermissions;
+    use ReportPermissions;
 
     public const USERS_INDEX = 'users_index';
     public const USERS_SHOW = 'users_show';
@@ -34,6 +36,9 @@ class Permissions
     public const LOGS_VIEW = 'logs_view';
     public const PAYMENT_INDEX = 'payment_index';
     public const PAYMENT_SHOW = 'payment_show';
+    public const PRODUCT_EXPORT = 'product_export';
+    public const PRODUCT_IMPORT = 'product_import';
+    public const REPORTS = 'reports';
 
     public static function getAll(): array
     {
@@ -43,6 +48,7 @@ class Permissions
             static::getProductsPermissions(),
             static::getCategoriesPermissions(),
             static::getPaymentPermissions(),
+            static::getReportsPermissions(),
         );
     }
 }

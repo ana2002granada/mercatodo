@@ -11,10 +11,10 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name', 100);
+            $table->string('name', 100)->unique();
             $table->string('description', 255);
-            $table->uuid('uuid')->unique();
-            $table->string('image');
+            $table->uuid('uuid')->unique()->nullable();
+            $table->string('image')->nullable();
             $table->decimal('price');
             $table->unsignedInteger('stock');
             $table->timestamps();

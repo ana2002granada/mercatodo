@@ -73,14 +73,15 @@ class PlaceToPayGateway implements GatewayPaymentContract
 
     public function query(Payment $payment): Payment
     {
+        info('payment', $payment->toArray());
         $response = $this->placetopay->query($payment->request_id);
 
         if ($response->isSuccessful()) {
             if ($response->status()->isApproved()) {
                 $payment->status = PaymentStatus::SUCCESSFUL;
                 $payment->paid_at = new Carbon($response->status()->date());
-                $payment->receipt = Arr::get($response->payment(), 'receipt');
-                TransactionIsApproved::dispatch($payment, auth()->user());
+                $payment->receipt = $response->lastTransaction()->receipt();
+                TransactionIsApproved::dispatch($payment);
             } elseif ($response->status()->isRejected()) {
                 $payment->status = PaymentStatus::REJECTED;
             }

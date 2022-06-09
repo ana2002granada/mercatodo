@@ -38,4 +38,14 @@ class ProductPolicy
     {
         return $user->can(Permissions::PRODUCTS_TOGGLE);
     }
+
+    public function export(User $user): bool
+    {
+        return $user->can(Permissions::PRODUCT_EXPORT);
+    }
+
+    public function import(User $user): bool
+    {
+        return $user->can(Permissions::PRODUCT_IMPORT);
+    }
 }

@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use App\Actions\Products\StoreOrUpdateProductAction;
 use App\Helpers\MoneyHelper;
 use App\Http\Requests\Admin\FormProductRequest;
-use App\Models\Traits\HasProductRoutes;
 use App\Models\Traits\HasStatus;
+use App\Models\Traits\Products\HasProductRoutes;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -21,6 +20,7 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'price',
         'stock',
         'category_id',
@@ -41,7 +41,7 @@ class Product extends Model
         return $this->showGuestRoute();
     }
 
-    public function getImageRouteAttribute()
+    public function getImageRouteAttribute(): string
     {
         return '/storage/' . $this->image;
     }
@@ -92,6 +92,15 @@ class Product extends Model
         });
     }
 
+    public function scopeStockFilter(Builder $query, ?string $start, ?string $end): Builder
+    {
+        return $query->when($start, function ($query) use ($start) {
+            $query->where('stock', '>=', $start);
+        })->when($end, function ($query) use ($end) {
+            $query->where('stock', '<=', $end);
+        });
+    }
+
     public function scopeCategoryFilter(Builder $query, ?string $category): Builder
     {
         return $query->when($category, function ($query) use ($category) {
@@ -99,28 +108,15 @@ class Product extends Model
         });
     }
 
-    public static function storeOrUpdateProduct(FormProductRequest $request, ?Product $product = null): Product
+    public static function storeOrUpdateProduct(FormProductRequest $request, StoreOrUpdateProductAction $action, ?self $product = null): self
     {
-        if (!$product) {
-            $product = new Product();
-            $product->uuid = (string) Str::uuid();
-        }
-
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->stock = $request->stock;
-        $product->price = $request->price;
-        $product->category_id = $request->category;
-
-        if ($request->file('image')) {
-            if ($product->image && Storage::exists($product->image)) {
-                Storage::delete($product->image);
-            }
-            $product->image = $request->file('image')->storeAs('products', $product->uuid . '_' . $request->file('image')->hashName());
-        }
-
-        $product->save();
-
-        return $product;
+        return $action->execute([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'stock' => $request->stock,
+            'price' => $request->price,
+            'image' => $request->file('image'),
+        ], $product);
     }
 }
